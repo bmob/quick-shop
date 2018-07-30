@@ -1,0 +1,156 @@
+<template>
+
+  <!-- template里只能有一个根节点 -->
+  <div class="container">
+    <div class='banner_box'>
+      <swiper class="swiper-info" indicator="{{indicator}}" autoplay="{{autoplay}}" interval="{{interval}}">
+        <block for="bannerArr">
+          <image src="{{$item.pic}}" />
+        </block>
+      </swiper>
+    </div>
+
+    <!-- 产品名称 -->
+    <div class="good-title">
+      <div class="good-title-h1">
+        <text>x百货产品iphonex 手机</text>
+      </div>
+      <div class="good-price">
+        <text>199-2999</text>
+      </div>
+    </div>
+    <!--end 产品名称 -->
+    <div class="item-null"></div>
+    <!-- 产品库存 -->
+    <div class="good-title">
+      <div class="good-title-h1">
+        <text>运费：</text>
+        <text>35元</text>
+      </div>
+      <div class="good-price">
+        <text>剩余</text>
+        <text>323</text>
+      </div>
+    </div>
+    <!-- end 产品库存 -->
+    <div class="item-null"></div>
+    <!-- 商品详细 -->
+    <div class="good-title">
+      <text>描述内容</text>
+      <div><text>描述内容</text></div>
+      <div><text>描述内容</text></div>
+      <div><text>描述内容</text></div>
+      <div><text>描述内容</text></div>
+      <div><text>描述内容</text></div>
+      <div><text>描述内容</text></div>
+      <div><text>描述内容</text></div>
+      <div><text>描述内容</text></div>
+      <div><text>描述内容</text></div>
+      <image src="$bannerArr[0].src"></image>
+    </div>
+    <!-- 商品详细 -->
+
+    <div id="buy-button">fff</div>
+  </div>
+</template>
+
+<style>
+  @import '../../Common/css/common.css';
+  .item-null {
+    height: 10px;
+    background-color: #eeeeee;
+  }
+
+  .swiper-info {
+    height: 400px;
+  }
+
+  .good-title {
+    height: 80px;
+    padding: 18px;
+  }
+
+  .good-title-h1 {
+    width: 70%;
+  }
+
+  .good-title-h1 text {
+    font-size: 48px;
+  }
+
+  .good-price {
+    justify-content: flex-end;
+    width: 30%;
+  }
+
+  .good-price text {
+    color: #ff0000;
+    font-size: 40px;
+  }
+  #buy-button{
+    background-color: #ff0000;
+    height: 80px;
+    position: fixed;
+    bottom: 0px;
+  }
+</style>
+
+<script>
+  import prompt from '@system.prompt'
+  import shortcut from '@system.shortcut'
+
+  module.exports = {
+    data: {
+
+      indicator: true,
+      autoplay: true,
+      interval: 3000,
+      bannerArr: [
+        { pic: 'http://www.honor.cn/public/uploads/20180421/6509c1ef795fa601d008627741d72a05.jpg' },
+        { pic: 'http://res.vmallres.com/pimages//sale/2018-06/20180615153106235.jpg' },
+        { pic: 'https://res.vmallres.com/pimages//sale/2018-06/20180618120952668.jpg' },
+        { pic: 'http://www.honor.cn/public/uploads/20180508/3cb0abb440f41a06a029a073361c8b15.jpg' }
+      ],
+    },
+    onInit() {
+      this.$page.setTitleBar({
+        text: '详细页面',
+        textColor: '#ffffff',
+        backgroundColor: '#007DFF',
+        backgroundOpacity: 0.5,
+        menu: true
+      })
+    },
+    onMenuPress() {
+      prompt.showContextMenu({
+        itemList: ['添加到桌面'],
+        success: function (data) {
+          shortcut.install({
+            success: function () {
+              // 使用应用加载器时，请先在设置中打开应用加载器的桌面快捷方式
+              prompt.showToast({
+                message: "桌面图标创建成功"
+              })
+            },
+            fail: function (erromsg, errocode) {
+              prompt.showToast({ message: "创建失败" + errocode + ': ' + erromsg })
+            },
+            complete: function () {
+              console.log('shortcut complete');
+            }
+          })
+        },
+        fail: function (data, code) {
+          console.log("handling fail, code=" + code);
+        },
+        cancel: function (data) {
+          console.log("handling cancel");
+        },
+        complete: function () {
+          console.log("handling complete");
+        },
+      })
+
+    }
+  }
+</script>

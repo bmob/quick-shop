@@ -76,9 +76,25 @@
       "isRun": false,
       "autoRun": false,
       "widgetParams": "{}"
+    },
+    {
+      "name": "Debug Widget main/detail on Device",
+      "type": "fastapp",
+      "request": "launch",
+      "device": "${command:fastapp.choose-device}",
+      "cwd": "${workspaceRoot}",
+      "logLevel": "log",
+      "adbPort": 5037,
+      "debugServerPort": 8088,
+      "remoteDebug": true,
+      "elementMode": false,
+      "widgetUri": "main/detail",
+      "isRun": false,
+      "autoRun": false,
+      "widgetParams": "{}"
     }
   ],
-  "currentWidgetUri": "main",
+  "currentWidgetUri": "main/detail",
   "signType": "debugSign",
   "pageConfigurations": [
     {
@@ -104,6 +120,12 @@
       "id": "us/version",
       "params": [],
       "path": "/us/version"
+    },
+    {
+      "name": "main/detail",
+      "id": "main/detail",
+      "params": [],
+      "path": "/main/detail"
     }
   ],
   "lastWidgetUri": "shop/test"
