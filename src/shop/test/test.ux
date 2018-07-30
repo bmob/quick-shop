@@ -1,0 +1,25 @@
+<template>
+    <list>
+        <block for="cities">
+            <list-item type="city">
+                <text>{{$item.name}}</text>
+            </list-item>
+            <block for="$item.spots" if="false">
+                <list-item type="spot">
+                    <text>{{$item.address}}</text>
+                </list-item>
+            </block>
+        </block>
+    </list>
+</template>
+
+<script>
+  module.exports= {
+    data: {
+      cities: [
+        {name:"beijing", spots:[{name:"XXX",address:"XXX"},{name:"XXX",address:"XXX"}]},
+        {name:"shanghai", spots:[{name:"XXX",address:"XXX"},{name:"XXX",address:"XXX"}]}
+      ]
+    }
+  }
+</script>    

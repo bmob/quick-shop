@@ -1,0 +1,159 @@
+<template>
+    <!-- template里只能有一个根节点 -->
+    <div class="container">
+        <div class='banner_box'>
+            <swiper class="swiper" indicator="{{indicator}}" autoplay="{{autoplay}}" interval="{{interval}}">
+                <block for="bannerArr">
+                    <image src="{{$item.pic}}" />
+                </block>
+            </swiper>
+        </div>
+        <div class="text">
+            <div class="line_flag"></div>
+            <text>主题馆</text>
+        </div>
+        <div class="theme_box box">
+            <block for="themeArr">
+                <div class="theme_item">
+                    <image src="{{$item.pic}}" />
+                    <text class="title">{{$item.title}}</text>
+                </div>
+            </block>
+        </div>
+        <div class="text">
+            <div class="line_flag"></div>
+            <text>环球精选</text>
+        </div>
+        <div class="glob_box box">
+            <block for="globArr">
+                <div class="glob_item">
+                    <image src="{{$item.pic}}" />
+                    <text class="title">{{$item.title}}</text>
+                </div>
+            </block>
+        </div>
+    </div>
+</template>
+
+<style>
+    .container {
+        flex-direction: column;
+    }
+
+    .swiper {
+        height: 300px;
+    }
+
+    .swiper image {
+        resize-mode: stretch
+    }
+
+    .text {
+        font-size: 15px;
+        padding: 10px 10px 10px 12px;
+        align-items: center;
+        color: #656565;
+    }
+
+    .line_flag {
+        width: 5px;
+        height: 15px;
+        background-color: #f9f027;
+        margin-right: 10px;
+    }
+
+    .box {
+        flex-wrap: wrap;
+        padding: 0 10px;
+        justify-content: space-between
+    }
+
+    .theme_item,
+    .glob_item {
+        width: 49%;
+        align-items: center;
+        margin: 10px 0;
+        flex-direction: column;
+    }
+
+    .box image {
+        height: 300px;
+    }
+
+    .box .title {
+        font-size: 24px;
+        font-weight: bold;
+        color: #333333;
+        margin-top:10px;
+    }
+</style>
+
+<script>
+    import prompt from '@system.prompt'
+    import shortcut from '@system.shortcut'
+
+    module.exports = {
+        data: {
+            indicator: true,
+            autoplay: true,
+            interval: 3000,
+            bannerArr: [
+                { pic: 'http://www.honor.cn/public/uploads/20180421/6509c1ef795fa601d008627741d72a05.jpg' },
+                { pic: 'http://res.vmallres.com/pimages//sale/2018-06/20180615153106235.jpg' },
+                { pic: 'https://res.vmallres.com/pimages//sale/2018-06/20180618120952668.jpg' },
+                { pic: 'http://www.honor.cn/public/uploads/20180508/3cb0abb440f41a06a029a073361c8b15.jpg' }
+            ],
+            themeArr: [
+                { pic: 'http://www.honor.cn/public/uploads/20180312/1adb6ecb70161ca0555aa5b7b24150f7.jpg', title: "demo文字" },
+                { pic: 'http://www.honor.cn/public/uploads/20180410/61e388fa5953db7d7e03e02a2b6b28cd.png', title: "demo文字" },
+                { pic: 'http://www.honor.cn/public/uploads/20180421/ec40e6799c5c8e82fb1a39da5719d4d3.jpg', title: "demo文字" },
+                { pic: 'http://www.honor.cn/public/uploads/20171226/f1597de41ca2487cc2db5fd46b5de99b.jpg', title: "demo文字" }
+            ],
+            globArr: [
+                { pic: 'http://www.honor.cn/public/uploads/20180312/1adb6ecb70161ca0555aa5b7b24150f7.jpg', title: "demo文字" },
+                { pic: 'http://www.honor.cn/public/uploads/20180410/61e388fa5953db7d7e03e02a2b6b28cd.png', title: "demo文字" },
+                { pic: 'http://www.honor.cn/public/uploads/20180421/ec40e6799c5c8e82fb1a39da5719d4d3.jpg', title: "demo文字" },
+                { pic: 'http://www.honor.cn/public/uploads/20171226/f1597de41ca2487cc2db5fd46b5de99b.jpg', title: "demo文字" }
+            ]
+        },
+        onInit() {
+            this.$page.setTitleBar({
+                text: 'SaleTitle',
+                textColor: '#ffffff',
+                backgroundColor: '#0f0a0a',
+                menu: true
+            })
+        },
+        onMenuPress() {
+            prompt.showContextMenu({
+                itemList: ['添加到桌面'],
+                success: function (data) {
+                    shortcut.install({
+                        success: function () {
+                            // 使用应用加载器时，请先在设置中打开应用加载器的桌面快捷方式
+                            prompt.showToast({
+                                message: "桌面图标创建成功"
+                            })
+                        },
+                        fail: function (erromsg, errocode) {
+                            prompt.showToast({ message: "创建失败" + errocode + ': ' + erromsg })
+                        },
+                        complete: function () {
+                            console.log('shortcut complete');
+                        }
+                    })
+                },
+                fail: function (data, code) {
+                    console.log("handling fail, code=" + code);
+                },
+                cancel: function (data) {
+                    console.log("handling cancel");
+                },
+                complete: function () {
+                    console.log("handling complete");
+                },
+            })
+
+        }
+    }
+</script>

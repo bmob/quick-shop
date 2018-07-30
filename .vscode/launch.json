@@ -1,0 +1,110 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Debug FastApp on Device",
+      "type": "fastapp",
+      "request": "launch",
+      "device": "${command:fastapp.choose-device}",
+      "cwd": "${workspaceRoot}",
+      "logLevel": "log",
+      "adbPort": 5037,
+      "debugServerPort": 8088,
+      "remoteDebug": true,
+      "elementMode": false
+    },
+    {
+      "name": "Debug Widget shop on Device",
+      "type": "fastapp",
+      "request": "launch",
+      "device": "${command:fastapp.choose-device}",
+      "cwd": "${workspaceRoot}",
+      "logLevel": "log",
+      "adbPort": 5037,
+      "debugServerPort": 8088,
+      "remoteDebug": true,
+      "elementMode": false,
+      "widgetUri": "shop",
+      "isRun": false,
+      "autoRun": false,
+      "widgetParams": "{}"
+    },
+    {
+      "name": "Debug Widget shop/test on Device",
+      "type": "fastapp",
+      "request": "launch",
+      "device": "${command:fastapp.choose-device}",
+      "cwd": "${workspaceRoot}",
+      "logLevel": "log",
+      "adbPort": 5037,
+      "debugServerPort": 8088,
+      "remoteDebug": true,
+      "elementMode": false,
+      "widgetUri": "shop/test",
+      "isRun": false,
+      "autoRun": false,
+      "widgetParams": "{}"
+    },
+    {
+      "name": "Debug Widget main on Device",
+      "type": "fastapp",
+      "request": "launch",
+      "device": "${command:fastapp.choose-device}",
+      "cwd": "${workspaceRoot}",
+      "logLevel": "log",
+      "adbPort": 5037,
+      "debugServerPort": 8088,
+      "remoteDebug": true,
+      "elementMode": false,
+      "widgetUri": "main",
+      "isRun": false,
+      "autoRun": false,
+      "widgetParams": "{}"
+    },
+    {
+      "name": "Debug Widget us/version on Device",
+      "type": "fastapp",
+      "request": "launch",
+      "device": "${command:fastapp.choose-device}",
+      "cwd": "${workspaceRoot}",
+      "logLevel": "log",
+      "adbPort": 5037,
+      "debugServerPort": 8088,
+      "remoteDebug": true,
+      "elementMode": false,
+      "widgetUri": "us/version",
+      "isRun": false,
+      "autoRun": false,
+      "widgetParams": "{}"
+    }
+  ],
+  "currentWidgetUri": "main",
+  "signType": "debugSign",
+  "pageConfigurations": [
+    {
+      "name": "shop",
+      "id": "shop",
+      "params": [],
+      "path": "/shop"
+    },
+    {
+      "name": "shop/test",
+      "id": "shop/test",
+      "params": [],
+      "path": "/shop/test"
+    },
+    {
+      "name": "main",
+      "id": "main",
+      "params": [],
+      "path": "/main"
+    },
+    {
+      "name": "us/version",
+      "id": "us/version",
+      "params": [],
+      "path": "/us/version"
+    }
+  ],
+  "lastWidgetUri": "main"
+}

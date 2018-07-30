@@ -1,0 +1,124 @@
+<template>
+  <div class="qui-light-box">
+    <swiper show="{{show}}" class="qui-light-swiper {{animationClass}}" indicator="{{replaceShowIndicator}}" style="indicator-color:{{indicatorColor}};indicator-selected-color:{{indicatorSelectedColor}}; indicator-size :{{indicatorSize}} ; animation-duration:  {{animationDuration}}">
+      <div class=" swiper-item " for="{{options}} " @click="closeClick">
+        <image class="swiper-image " src="{{$item}} " />
+      </div>
+    </swiper>
+  </div>
+</template>
+
+<style>
+  .qui-light-swiper {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.4);
+    animation-fill-mode: forwards;
+  }
+
+  .lightboxenter {
+    animation-name: lightboxenter;
+  }
+
+  .lightboxleave {
+    animation-name: lightboxleave;
+  }
+
+  .swiper-item {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .swiper-image {
+    width: 100%;
+    resize-mode: contain;
+  }
+
+  @keyframes lightboxenter {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  @keyframes lightboxleave {
+    0% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+</style>
+
+<script>
+  export default {
+    props: {
+      visible: {
+        type: String,
+        default: '1'
+      },
+      showIndicator: {
+        type: String,
+        default: '0'
+      },
+      indicatorColor: {
+        type: String,
+        default: 'rgba(0, 0, 0, 0.5)'
+      },
+      indicatorSelectedColor: {
+        type: String,
+        default: '#33b4ff'
+      },
+      options: {
+        type: Array
+      }
+    },
+    data() {
+      return {
+        show: true,
+        replaceShowIndicator: false,
+        animationClass: '',
+        animationDuration: 600,
+      }
+    },
+    onInit() {
+      this.initialize()
+      this.toggleShow(this.show)
+      this.$watch(`visible`, `initialize`)
+      this.$watch(`show`, 'toggleShow')
+    },
+    initialize() {
+      if (this.visible !== "1") {
+        this.show = false
+      } else {
+        this.show = true
+      }
+      if (this.showIndicator !== "0") {
+        this.replaceShowIndicator = true
+      }
+    },
+    toggleShow(show) {
+      if (this.timeoutId) clearTimeout(this.timeoutId)
+      if (show) {
+        this.animationClass = 'lightboxenter'
+      } else {
+        this.animationClass = 'lightboxleave'
+        this.timeoutId = setTimeout(() => {
+        }, this.animationDuration - 100)
+      }
+    },
+    closeClick() {
+      this.$emit('quiCloseClick')
+    }
+  }
+</script>

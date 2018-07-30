@@ -1,0 +1,97 @@
+<template>
+  <div>
+    <div class="qui-button-box {{isActived ? 'active':''}}" style="backgroundColor:{{backgroundColor}};borderWidth:{{borderWidth}};width:{{width}};height:{{height}};borderColor:{{borderColor}};borderRadius:{{borderRadius}};opacity:{{opacity}}" @click="clicked">
+      <text class="qui-button-txt" style="color:{{color}};fontSize:{{fontSize}}">{{text}}</text>
+    </div>
+  </div>
+</template>
+
+<style>
+  .qui-button-box {
+    width: 300px;
+    height: 100px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    opacity: 1;
+    background-color: #0F8DE8;
+  }
+
+  .active {
+    opacity: 0.8;
+  }
+
+  .qui-button-txt {
+    text-overflow: ellipsis;
+    lines: 1;
+    color: #000000;
+    font-size: 36px;
+  }
+</style>
+
+<script>
+  export default {
+    props: {
+      tid: {
+        type: String
+      },
+      backgroundColor: {
+        type: String,
+        default: '#0F8DE8'
+      },
+      borderColor: String,
+      borderWidth: {
+        type: String,
+        default: '0px'
+      },
+      borderRadius: {
+        type: String,
+        default: '12px'
+      },
+      width: {
+        type: String,
+        default: '300px'
+      },
+      height: {
+        type: String,
+        default: '100px'
+      },
+      text: {
+        type: String,
+        default: '按钮'
+      },
+      disabled: {
+        type: String,
+        default: "0"
+      },
+      color: {
+        type: String,
+        default: '#000000'
+      },
+      fontSize: {
+        type: String,
+        default: '36px'
+      }
+    },
+    data: {
+      isActived: false,
+      opacity: 1,
+      wide: "0px"
+    },
+    onInit() {
+      if (this.disabled !== "0") {
+        this.opacity = '0.2',
+          this.wide = "0px"
+      }
+    },
+    clicked() {
+      this.isActived = true
+      setTimeout(() => {
+        this.isActived = false
+      }, 300)
+      this.$emit('quiClicked', {
+        tid: this.tid
+      })
+    }
+  }
+</script>

@@ -1,0 +1,228 @@
+<!-- Created by yzhangbao on 18/04/08. -->
+<!-- qui-checkbox -->
+
+<template>
+  <div class="qui-checkbox-box">
+    <block for="(index, row) in options">
+      <div if="!(index === 0) && replaceHasBorder" class="border-top"></div>
+      <div class="item {{replaceIsRight ? 'is-right' : ''}} {{row.disabled ? 'disabled' : ''}}" @click="clickAction(row)">
+        <text class="name" if="replaceIsRight" style="font-size: {{labelFontSize}};color: {{labelColor}}">{{row.label || row}}</text>
+        <stack class="checkbox" style="background-color: {{replaceChecked[index] ? checkedColor : checkColor}};border-color: {{replaceChecked[index] ? checkedBorderColor : checkBorderColor}}">
+          <div class="thumb {{replaceChecked[index] ? 'open' : 'close'}}" style="border-color: {{replaceChecked[index] ? thumbCheckedColor : thumbCheckColor}}"></div>
+        </stack>
+        <text class="name" if="!replaceIsRight" style="margin-left: {{labelMargin}};font-size: {{labelFontSize}};color: {{labelColor}}">{{row.label || row}}</text>
+      </div>
+    </block>
+  </div>
+</template>
+
+<style>
+  .qui-checkbox-box {
+    flex-direction: column;
+    background-color: #ffffff;
+  }
+
+  .border-top {
+    margin-left: 20px;
+    height: 1px;
+    background-color: #bbbbbb;
+  }
+
+  .item {
+    padding: 30px 40px;
+  }
+
+  .is-right {
+    justify-content: space-between;
+  }
+
+  .disabled .checkbox {
+    opacity: .5;
+  }
+
+  .checkbox {
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    border-radius: 30px;
+    border-width: 4px;
+  }
+
+  .thumb {
+    border-right-width: 4px;
+    border-bottom-width: 4px;
+    width: 15px;
+    height: 30px;
+    transform: rotate(45deg);
+    margin-top: -8px;
+  }
+
+  @keyframes open {
+    from {
+      transform: scale(0);
+    }
+    to {
+      transform: scale(1);
+    }
+  }
+
+  .open {
+    animation-name: open;
+    animation-duration: 0ms;
+    animation-fill-mode: forwards;
+  }
+
+  @keyframes close {
+    from {
+      transform: scale(1);
+    }
+    to {
+      transform: scale(0);
+    }
+  }
+
+  .close {
+    animation-name: close;
+    animation-duration: 0ms;
+    animation-fill-mode: forwards;
+  }
+</style>
+
+<script>
+  export default {
+    props: {
+      values: {
+        type: Array,
+        default: []
+      },
+      checked: {
+        type: Array,
+        default: []
+      },
+      options: {
+        type: Array,
+        default: []
+      },
+      labelMargin: {
+        type: String,
+        default: '30px'
+      },
+      labelFontSize: {
+        type: String,
+        default: "44px"
+      },
+      labelColor: {
+        type: String,
+        default: '#000000'
+      },
+      isRight: {
+        type: String,
+        default: '0'
+      },
+      hasBorder: {
+        type: String,
+        default: '1'
+      },
+      checkColor: {
+        type: String,
+        default: '#FFFFFF'
+      },
+      checkedColor: {
+        type: String,
+        default: '#2998F9'
+      },
+      checkBorderColor: {
+        type: String,
+        default: '#CACBCC'
+      },
+      checkedBorderColor: {
+        type: String,
+        default: '#2998F9'
+      },
+      thumbCheckColor: {
+        type: String,
+        default: 'transparent'
+      },
+      thumbCheckedColor: {
+        type: String,
+        default: '#FFFFFF'
+      },
+    },
+    data() {
+      return {
+        replaceIsRight: false,
+        replaceHasBorder: true,
+        replaceChecked: this.checked,
+        replaceValues: this.values
+      }
+    },
+    onInit() {
+      this.initialize()
+      this.updateChecked()
+      this.$on('evtCast', this.updateArr)
+    },
+    onReady() {
+      this.$watch('values', 'initialize')
+      this.$watch('replaceValues', 'change')
+      this.$watch('replaceValues', 'updateChecked')
+    },
+    initialize() {
+      if (this.isRight !== "0") {
+        this.replaceIsRight = true
+      }
+      if (this.hasBorder !== "1") {
+        this.replaceHasBorder = false
+      }
+      this.replaceValues = [...this.values]
+    },
+    clickAction(data) {
+      if (typeof data === 'object') {
+        if (!data.disabled) {
+          this.updateArr(data.value)
+        }
+      }
+      else {
+        this.updateArr(data)
+      }
+    },
+    updateChecked() {
+      for (let i = 0, a = this.options.length; i < a; i++) {
+        this.replaceChecked.splice(i, 1, false)
+        for (let j = 0, b = this.replaceValues.length; j < b; j++) {
+          let val = this.options[i].value || this.options[i]
+          if (b > 0 && val === this.replaceValues[j]) {
+            this.replaceChecked.splice(i, 1, true)
+            break
+          }
+        }
+      }
+    },
+    updateArr(params) {
+      let data = (typeof params === 'object' ? params.detail.params : params)
+      if (this.checkInArr(this.replaceValues, data)) {
+        this.replaceValues.forEach((val, idx) => {
+          if (val === data) {
+            this.replaceValues.splice(idx, 1)
+          }
+        })
+      }
+      else {
+        this.replaceValues.push(data)
+      }
+
+    },
+    checkInArr(arr, data) {
+      let isExist = false
+      for (var i = 0, len = arr.length; i < len; i++) {
+        if (arr[i] === data) {
+          isExist = true
+        }
+      }
+      return isExist
+    },
+    change() {
+      this.$emit('quiCheckboxChange', { values: this.replaceValues })
+    }
+  }
+</script>

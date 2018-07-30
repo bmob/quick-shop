@@ -1,0 +1,257 @@
+<import name='qui-searchbar' src='../Common/components/qui-searchbar/index'></import>
+
+
+<import name='qui-cell' src='../Common/components/qui-cell/index'></import>
+<import name='qui-switch' src='../Common/components/qui-switch/index'></import>
+<template>
+    <div class="container">
+
+        <!-- 表格 -->
+        <tabs>
+            <!-- 表格内容，用来展示tab的内容区，高度默认充满tabs剩余空间，子组件排列方式为横向排列 -->
+            <tab-content class="group-container">
+                <div class="group-content">
+
+
+                    <div class='banner_box'>
+                        <swiper class="swiper" indicator="{{indicator}}" autoplay="{{autoplay}}" interval="{{interval}}">
+                            <block for="bannerArr">
+                                <image src="{{$item.pic}}" />
+                            </block>
+                        </swiper>
+                    </div>
+                    <div class="text">
+                        <div class="line_flag"></div>
+                        <text>主题馆</text>
+                    </div>
+                    <div class="theme_box box">
+                        <block for="themeArr">
+                            <div class="theme_item">
+                                <image src="{{$item.pic}}" />
+                                <text class="title">{{$item.title}}</text>
+                            </div>
+                        </block>
+                    </div>
+                    <div class="text">
+                        <div class="line_flag"></div>
+                        <text>环球精选</text>
+                    </div>
+                    <div class="glob_box box">
+                        <block for="globArr">
+                            <div class="glob_item">
+                                <image src="{{$item.pic}}" />
+                                <text class="title">{{$item.title}}</text>
+                            </div>
+                        </block>
+                    </div>
+
+
+                </div>
+
+                <div class="group-content">
+
+                    <div class="search-box">
+                        <qui-searchbar id="search" placeholder='请输入关键字' @qui-search-focus="focus" @qui-search-blur="blur" @qui-search-click="search"
+                            @qui-search-clear="clear"></qui-searchbar>
+                    </div>
+
+                </div>
+
+
+
+
+                <div class="group-content">
+
+
+                    <div class="my-header">
+                        <image class="avatar" src="/Common/img/xmad.jpg" class="image"></image>
+                        <text>请登陆1</text>
+                    </div>
+
+                    
+                    <div class="page-doc">
+    
+                        <div for="{{myMenu}}" class="cell-box">
+                            <qui-cell @qui-cell-click='cellClicked' height='40px' background-color='#FFFFFF' left-img='{{$item.ico}}' title='{{$item.title}}' desc='{{$item.desc}}' has-arrow="1"></qui-cell>
+                        </div>
+
+                         <div class="cell-box">
+                            <qui-cell @qui-cell-click='versionClick' height='80px' background-color='#FFFFFF' left-img='/Common/logo.png' title='版本记录' desc='点击查看' has-arrow="1"></qui-cell>
+                        </div>
+                        <div class="cell-box">
+                            <qui-cell height='80px' background-color='#FFFFFF' left-img='/Common/logo.png' title='联系我们:' desc='QQ:730170034' has-arrow="0"></qui-cell>
+                        </div>
+
+                    </div>
+                </div>
+            </tab-content>
+
+
+            <tab-bar class="footer-container">
+                <text class="tab-text" @click="switchTab(1)">首页</text>
+                <text class="tab-text" @click="switchTab(2)">分类</text>
+                <text class="tab-text" @click="switchTab(3)">我</text>
+            </tab-bar>
+        </tabs>
+    </div>
+</template>
+
+<style>
+    @import '../Common/css/common.css';
+</style>
+
+<script>
+    import router from '@system.router'
+    import prompt from '@system.prompt'
+    module.exports = {
+        data: {
+            myMenu: [
+                { "c":"cellClicked","ico": "/Common/logo.png", "title": "反馈建议", "desc": "测试说明" },
+                {"c":"cellClicked", "ico": "/Common/logo.png", "title": "反馈建议", "desc": "测试说明" },
+                {"c":"cellClicked","ico": "/Common/logo.png", "title": "版本记录", "desc": "点击查看" }
+            ],
+
+            indicator: true,
+            autoplay: true,
+            interval: 3000,
+            bannerArr: [
+                { pic: 'http://www.honor.cn/public/uploads/20180421/6509c1ef795fa601d008627741d72a05.jpg' },
+                { pic: 'http://res.vmallres.com/pimages//sale/2018-06/20180615153106235.jpg' },
+                { pic: 'https://res.vmallres.com/pimages//sale/2018-06/20180618120952668.jpg' },
+                { pic: 'http://www.honor.cn/public/uploads/20180508/3cb0abb440f41a06a029a073361c8b15.jpg' }
+            ],
+            themeArr: [
+                { pic: 'http://www.honor.cn/public/uploads/20180312/1adb6ecb70161ca0555aa5b7b24150f7.jpg', title: "demo文字" },
+                { pic: 'http://www.honor.cn/public/uploads/20180410/61e388fa5953db7d7e03e02a2b6b28cd.png', title: "demo文字" },
+                { pic: 'http://www.honor.cn/public/uploads/20180421/ec40e6799c5c8e82fb1a39da5719d4d3.jpg', title: "demo文字" },
+                { pic: 'http://www.honor.cn/public/uploads/20171226/f1597de41ca2487cc2db5fd46b5de99b.jpg', title: "demo文字" }
+            ],
+            globArr: [
+                { pic: 'http://www.honor.cn/public/uploads/20180312/1adb6ecb70161ca0555aa5b7b24150f7.jpg', title: "demo文字" },
+                { pic: 'http://www.honor.cn/public/uploads/20180410/61e388fa5953db7d7e03e02a2b6b28cd.png', title: "demo文字" },
+                { pic: 'http://www.honor.cn/public/uploads/20180421/ec40e6799c5c8e82fb1a39da5719d4d3.jpg', title: "demo文字" },
+                { pic: 'http://www.honor.cn/public/uploads/20171226/f1597de41ca2487cc2db5fd46b5de99b.jpg', title: "demo文字" }
+            ],
+            list: {
+                compoDirective: '',
+                compoLife: '',
+                compoView: '',
+                compoEvent: '',
+                pageOther: '',
+                compoBasic: '',
+                compoForm: '',
+                compoOthers: '',
+                jsx: '',
+                interBasic: '',
+                interView: '',
+                interNet: '',
+                interFile: '',
+                interSys: '',
+                interMedia: '',
+                interVendor: '',
+                interSvcXiao: '',
+                interSvcThird: '',
+                template: '',
+                audio: ''
+            }
+        },
+        switchTab: function (i = 1) {
+            if (i == 1) {
+                this.$page.setTitleBar({ text: '首页' })
+            } else if (i == 2) {
+                this.$page.setTitleBar({ text: '分类' })
+            } else {
+                this.$page.setTitleBar({ text: '我' })
+            }
+        },
+        activeF: function (list, target, addClass) {
+            var obj = list;
+            if (obj[target] == addClass) {
+                obj[target] = '';
+                return
+            }
+            for (var a in obj) {
+                obj[a] = '';
+                if (target == a) {
+                    obj[a] = addClass;
+                }
+            }
+        },
+        selectConFn: function (e) {
+            this.activeF(this['list'], e, 'show');
+        },
+        detail: function (src) {
+            router.push({ 'uri': src });
+        },
+        routePath(path, params) {
+            router.push({ uri: path, params: params })
+        },
+        onInit() {
+            this.switchTab(1)
+
+            // setTimeout(() => {
+            //     this.$child("search").focus()
+            // }, 1000);
+
+        },
+        focus(e) {
+            prompt.showToast({
+                message: 'focus value:' + e.detail.value
+            })
+        },
+        blur(e) {
+            prompt.showToast({
+                message: 'blur value:' + e.detail.value
+            })
+        },
+        clear() {
+            prompt.showToast({
+                message: 'clear'
+            })
+        },
+        onMenuPress() {
+            prompt.showContextMenu({
+                itemList: ['添加到桌面'],
+                success: function (data) {
+                    shortcut.install({
+                        success: function () {
+                            // 使用应用加载器时，请先在设置中打开应用加载器的桌面快捷方式
+                            prompt.showToast({
+                                message: "桌面图标创建成功"
+                            })
+                        },
+
+                        fail: function (erromsg, errocode) {
+                            prompt.showToast({ message: "创建失败" + errocode + ': ' + erromsg })
+                        },
+                        complete: function () {
+                            console.log('shortcut complete');
+                        }
+                    })
+                },
+                fail: function (data, code) {
+                    console.log("handling fail, code=" + code);
+                },
+                cancel: function (data) {
+                    console.log("handling cancel");
+                },
+                complete: function () {
+                    console.log("handling complete");
+                },
+            })
+        },
+        search(e) {
+            prompt.showToast({
+                message: 'value:' + e.detail.value
+            })
+        },
+        cellClicked(e){
+            console.log("hello",e)
+        },
+        versionClick(){
+              router.push({
+                uri: '/us/version'
+            })
+        }
+    }
+</script>

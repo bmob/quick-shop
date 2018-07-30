@@ -1,0 +1,216 @@
+<template>
+  <text class="qui-badge-circle-bg {{badge_anim}} " style="width: {{width}};height:{{height}};
+        border-radius: {{(borderRadius)}};font-size:{{fontSize}};
+        font-weight:{{fontStyle}};background-color:{{background}};color:{{textColor}}">
+    {{replaceBadge}}
+  </text>
+</template>
+
+<style>
+  .qui-badge {
+    flex: 1;
+    align-items: center;
+  }
+
+  .qui-badge-circle-bg {
+    border-radius: 80px;
+    font-size: 44px;
+    background-color: #d00000;
+    text-align: center;
+    color: #ffffff;
+    font-weight: bold;
+    width: 80px;
+    height: 80px;
+    animation-fill-mode: forwards;
+  }
+
+  .qui-badge-fade-hide {
+    animation-name: FadeAnimationHide;
+    animation-duration: 500ms;
+  }
+
+  @keyframes FadeAnimationHide {
+    0% {
+      opacity: 1;
+    }
+
+    100% {
+      opacity: 0;
+    }
+  }
+
+  .qui-badge-fade-show {
+    animation-name: FadeAnimationShow;
+    animation-duration: 750ms;
+  }
+
+  @keyframes FadeAnimationShow {
+    0% {
+      opacity: 0;
+    }
+
+    30% {
+      opacity: 0;
+    }
+
+    100% {
+      opacity: 1;
+    }
+  }
+
+  .qui-badge-pop-hide {
+    animation-name: PopAnimationHide;
+    animation-duration: 500ms;
+  }
+
+  @keyframes PopAnimationHide {
+    0% {
+      transform: scale(1);
+    }
+
+    100% {
+      transform: scale(0);
+    }
+  }
+
+  .qui-badge-pop-show {
+    animation-name: PopAnimationShow;
+    animation-duration: 750ms;
+  }
+
+  @keyframes PopAnimationShow {
+    0% {
+      transform: scale(0);
+    }
+
+    30% {
+      transform: scale(0);
+    }
+
+    100% {
+      transform: scale(1);
+    }
+  }
+
+  .qui-badge-slide-hide {
+    animation-name: SlideAnimationHide;
+    animation-duration: 500ms;
+  }
+
+  @keyframes SlideAnimationHide {
+    0% {
+      transform: translateY(0px);
+      opacity: 1;
+    }
+
+    100% {
+      transform: translateY(80px);
+      opacity: 0;
+    }
+  }
+
+  .qui-badge-slide-show {
+    animation-name: SlideAnimationShow;
+    animation-duration: 750ms;
+  }
+
+  @keyframes SlideAnimationShow {
+    0% {
+      transform: translateY(80px);
+      opacity: 0;
+    }
+
+    30% {
+      transform: translateY(80px);
+      opacity: 0;
+    }
+
+    100% {
+      transform: translateY(0px);
+      opacity: 1;
+    }
+  }
+</style>
+
+<script>
+  const anim_map = {
+    'pop': ['qui-badge-pop-hide', 'qui-badge-pop-show'],
+    'fade': ['qui-badge-fade-hide', 'qui-badge-fade-show'],
+    'slide': ['qui-badge-slide-hide', 'qui-badge-slide-show']
+  }
+  export default {
+    props: {
+      fontStyle: {
+        type: String,
+        default: 'bold'
+      },
+      background: {
+        type: String,
+        default: '#d00000'
+      },
+      textColor: {
+        type: String,
+        default: '#ffffff'
+      },
+      animationType: {
+        type: String,
+        default: 'none'
+      },
+      badge: {
+        type: String,
+        default: "0"
+      },
+      height: {
+        type: String,
+        default: '80px'
+      },
+      width: {
+        type: String,
+        default: '80px'
+      },
+      borderRadius: {
+        type: String,
+        default: '80px'
+      },
+      fontSize: {
+        type: String,
+        default: '44px'
+      }
+    },
+    data() {
+      return {
+        badge_anim: '',
+        replaceBadge: Number(this.badge)
+      }
+    },
+    onInit: function () {
+      this.$watch('replaceBadge', 'badgeChange')
+    },
+    addDelta(delta) {
+      let ref = this
+      let action = function () {
+        ref.replaceBadge += delta
+      }
+      let playAnim = false
+      if (anim_map.hasOwnProperty(this.animationType)) {
+        playAnim = true
+      }
+      if (playAnim) {
+        const [hide, show] = anim_map[this.animationType]
+        this.playAnim(hide, show, action)
+        return
+      }
+      action()
+    },
+    playAnim(hide, show, action) {
+      this.badge_anim = hide
+      setTimeout(() => {
+        action()
+        this.badge_anim = show
+      }, 500)
+    },
+    badgeChange: function () {
+      this.$emit('quiBadgeChange', { value: this.replaceBadge })
+    }
+  }
+</script>

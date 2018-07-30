@@ -1,0 +1,34 @@
+<import name="qui-flow" src="../../Common/components/qui-flow/index"></import>
+
+
+<template>
+ <div class="page">
+    <qui-flow line='#0F8DE8' background='#ffffff' border='#0F8DE8' highlight-title='#0F8DE8' 
+    highlight-background='#ffffff' highlight-border='#0F8DE8' options="{{list}}"></qui-flow>
+  </div>
+</template>
+
+<script>
+
+  export default {
+    onInit: function () {
+                      this.$page.setTitleBar({ text: '版本记录' })
+
+    },
+    private: {
+      list: [{
+        'desc': '您以确定了方案',
+        'title': '方案已上传'
+      }, {
+        'highlight': true,
+        'time': '2017-07-27 10:49:03',
+        'desc': '首页UI完成',
+        'title': '0.0.2'
+      }, {
+        'time': '2017-06-24 19:49:03',
+        'desc': '确认开发商城方案已确认',
+        'title': '0.0.1'
+      }]
+    }
+  }
+</script>

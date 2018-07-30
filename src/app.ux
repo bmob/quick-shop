@@ -1,0 +1,21 @@
+<script>
+  import Bmob from './Bmob.js'
+  Bmob.initialize('bb20359e8e7eb634fff2c76089ce0d80', '0dcb80eb0cf198b9facccbf3f0b29b89');
+  module.exports = {
+    onCreate() {
+      console.info('Application onCreate');
+       console.log('hello')
+   
+    },
+    onInit: function () {
+       console.log('hello')
+   
+    },
+    onDestroy() {
+      console.info('Application onDestroy');
+    },
+    dataApp:{
+      "uShopPath":"../Common/components/"
+    }
+  }
+</script>

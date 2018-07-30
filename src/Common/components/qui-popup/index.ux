@@ -1,0 +1,242 @@
+<import name="qui-overlay" src="../qui-overlay/index"></import>
+
+<template>
+  <qui-overlay visible="{{visible}}" background="{{background}}" @qui-overlay-click="overlayClick">
+    <div class="qui-popup-box box-{{position}}" show="{{show}}">
+      <div class="qui-popup-placeholder placeholder-{{position}} {{animationClass}}" style="animation-duration: {{animationDuration}}ms;"
+        if="{{position === 'right' || position === 'bottom'}}"></div>
+      <div class="qui-popup-content" style="{{contentStyle}}">
+        <slot></slot>
+      </div>
+      <div class="qui-popup-placeholder placeholder-{{position}} {{animationClass}}" style="animation-duration: {{animationDuration}}ms;"
+        if="{{position === 'left' || position === 'top'}}"></div>
+    </div>
+  </qui-overlay>
+</template>
+
+<style>
+  .qui-popup-box {
+    position: fixed;
+  }
+
+  .box-top {
+    top: 0;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
+
+  .box-bottom {
+    bottom: 0;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+  }
+
+  .box-left {
+    top: 0;
+    bottom: 0;
+    left: 0;
+    flex-direction: row;
+    justify-content: flex-end;
+  }
+
+  .box-right {
+    top: 0;
+    bottom: 0;
+    right: 0;
+    flex-direction: row;
+  }
+
+  .qui-popup-placeholder {
+    flex-shrink: 0;
+    opacity: 0;
+    animation-fill-mode: forwards;
+  }
+
+  .placeholder-top,
+  .placeholder-bottom {
+    height: 2400px;
+  }
+
+  .placeholder-left,
+  .placeholder-right {
+    width: 1080px;
+  }
+
+  .qui-popup-content {
+    flex-shrink: 0;
+    flex-direction: column;
+  }
+
+  .bottompopupenter {
+    animation-name: bottompopupenter;
+  }
+
+  .bottompopupleave {
+    animation-name: bottompopupleave;
+  }
+
+  @keyframes bottompopupenter {
+    0% {
+      height: 2400px;
+    }
+    100% {
+      height: 0;
+    }
+  }
+
+  @keyframes bottompopupleave {
+    0% {
+      height: 0;
+    }
+    100% {
+      height: 2400px;
+    }
+  }
+
+  .toppopupenter {
+    animation-name: toppopupenter;
+  }
+
+  .toppopupleave {
+    animation-name: toppopupleave;
+  }
+
+  @keyframes toppopupenter {
+    0% {
+      height: 2400px;
+    }
+    100% {
+      height: 0;
+    }
+  }
+
+  @keyframes toppopupleave {
+    0% {
+      height: 0;
+    }
+    100% {
+      height: 2400px;
+    }
+  }
+
+  .rightpopupenter {
+    animation-name: rightpopupenter;
+  }
+
+  .rightpopupleave {
+    animation-name: rightpopupleave;
+  }
+
+  @keyframes rightpopupenter {
+    0% {
+      width: 1080px;
+    }
+    100% {
+      width: 0;
+    }
+  }
+
+  @keyframes rightpopupleave {
+    0% {
+      width: 0;
+    }
+    100% {
+      width: 1080px;
+    }
+  }
+
+  .leftpopupenter {
+    animation-name: leftpopupenter;
+  }
+
+  .leftpopupleave {
+    animation-name: leftpopupleave;
+  }
+
+  @keyframes leftpopupenter {
+    0% {
+      width: 1080px;
+    }
+    100% {
+      width: 0;
+    }
+  }
+
+  @keyframes leftpopupleave {
+    0% {
+      width: 0;
+    }
+    100% {
+      width: 1080px;
+    }
+  }
+</style>
+
+<script>
+  import device from '@system.device'
+
+  export default {
+    props: {
+      visible: {
+        type: String,
+        default: '0'
+      },
+      position: {
+        type: String,
+        default: 'bottom'
+      },
+      background: {
+        type: String,
+        default: 'rgba(0,0,0,0.4)'
+      }
+    },
+    data() {
+      return {
+        show: this.visible === '1',
+        screenWidth: 1080,
+        contentStyle: {},
+        animationClass: '',
+        animationDuration: 800
+      }
+    },
+    onInit() {
+      this.setDefault()
+      this.setContentStyle()
+      this.toggleVisible(this.visible)
+    },
+    setDefault() {
+      this.$watch('visible', 'toggleVisible')
+    },
+    toggleVisible(visible) {
+      if (this.timeoutId) clearTimeout(this.timeoutId)
+
+      if (visible === '1') {
+        this.show = true
+        this.animationClass = `${this.position}popupenter`
+      } else {
+        this.animationClass = `${this.position}popupleave`
+        this.timeoutId = setTimeout(() => {
+          this.show = false
+        }, this.animationDuration - 200)
+      }
+    },
+    setContentStyle() {
+      if (this.position === 'bottom' || this.position === 'top') {
+        this.contentStyle = {
+          width: `${this.screenWidth}px`,
+          height: 'auto'
+        }
+      } else {
+        this.contentStyle = {
+          width: 'auto'
+        }
+      }
+    },
+    overlayClick() {
+      this.$emit('quiOverlayClick')
+    }
+  }
+</script>

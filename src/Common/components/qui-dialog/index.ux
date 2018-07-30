@@ -1,0 +1,109 @@
+<import name="qui-overlay" src="../qui-overlay/index"></import>
+<import name="qui-button" src="../qui-button/index"></import>
+
+<template>
+  <qui-overlay visible="{{visible}}" background="{{background}}" @qui-overlay-click="overlayClick">
+    <div class="qui-dialog">
+      <text class="qui-dialog-title" if="title && typeof title === 'string'">{{title}}</text>
+      <div class="qui-dialog-content">
+        <slot></slot>
+      </div>
+      <div class="qui-dialog-btns" if="list.length">
+        <div for="list" style="width:{{100/(1.12*list.length-0.12)}}%">
+          <qui-button tid="{{$item.index}}" text="{{$item.text}}" border-color="{{$item.btnStyle.borderColor}}" background-color="{{$item.btnStyle.backgroundColor}}"
+            border-width="{{$item.btnStyle.borderWidth}}" border-radius="{{$item.btnStyle.borderRadius}}" width="{{$item.btnStyle.width}}"
+            height="{{$item.btnStyle.height}}" color="{{$item.textStyle.color}}" font-size="{{$item.textStyle.fontSize}}" @qui-clicked="btnClick">
+          </qui-button>
+        </div>
+      </div>
+    </div>
+  </qui-overlay>
+</template>
+
+<style>
+  .qui-dialog {
+    flex-direction: column;
+    padding: 60px 72px;
+    width: 984px;
+    background-color: #ffffff;
+  }
+
+  .qui-dialog-title {
+    margin-bottom: 35px;
+    height: 71px;
+    font-size: 51px;
+    text-align: center;
+  }
+
+  .qui-dialog-btns {
+    margin-top: 72px;
+    justify-content: space-between;
+  }
+</style>
+
+<script>
+  /**
+   * visible: '1'/'0',  //是否显示
+   * background: 'rgba(0,0,0,.4)',   //遮罩层背景色
+   * title: '',   //对话框标题，为空不显示
+   * btns: []     //对话框按钮
+   */
+  export default {
+    props: {
+      visible: {
+        type: String,
+        default: '0'
+      },
+      background: {
+        type: String,
+        default: 'rgba(0,0,0,0.4)'
+      },
+      title: {
+        type: String,
+        default: ''
+      },
+      btns: {
+        type: Array,
+        default: [{ text: '确定', color: '#0090ff' }, { text: '取消', color: '#999999' }]
+      }
+    },
+    data() {
+      return {
+        list: []
+      }
+    },
+    onInit() {
+      this.$watch('btns', 'updateBtns')
+      this.updateBtns()
+    },
+    updateBtns() {
+      this.list = []
+      this.btns && this.btns.forEach((btn, index) => {
+        this.list.push({
+          index: index,
+          text: btn.text,
+          btnStyle: {
+            borderColor: btn.color || '#000000',
+            backgroundColor: 'rgba(0,0,0,0)',
+            borderWidth: '2px',
+            borderRadius: '18px',
+            width: '100%',
+            height: '104px'
+          },
+          textStyle: {
+            color: btn.color || '#000000',
+            fontSize: '45px'
+          }
+        })
+      })
+    },
+    overlayClick() {
+      this.$emit('quiOverlayClick')
+    },
+    btnClick(evt) {
+      this.$emit('quiBtnClick', {
+        index: evt.detail.tid
+      })
+    }
+  }
+</script>

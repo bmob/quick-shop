@@ -1,0 +1,252 @@
+<template>
+    <div class="container">
+        <div class="page-title-wrap">
+            <text class="page-title">{{componentName}}</text>
+        </div>
+        <!-- flex-wrap -->
+        <div class="item-container">
+            <text class="item-title">flex-direction: row;flex-wrap:nowrap</text>
+            <div style="border-color:#0000ff;">
+                <text class="item color-1">331</text>
+                <text class="item color-2">2</text>
+                <text class="item color-3">3</text>
+                <text class="item color-1">4</text>
+                <text class="item color-2">5</text>
+                <text class="item color-3">6</text>
+            </div>
+        </div>
+        <div class="item-container">
+            <text class="item-title">flex-direction: row;flex-wrap:wrap</text>
+            <div style="flex-wrap:wrap;">
+                <text class="item color-1">1</text>
+                <text class="item color-2">2</text>
+                <text class="item color-3">3</text>
+                <text class="item color-1">4</text>
+                <text class="item color-2">5</text>
+                <text class="item color-3">6</text>
+            </div>
+        </div>
+        <div class="item-container">
+            <text class="item-title">flex-direction: row;flex-wrap:wrap-reverse</text>
+            <div style="flex-wrap:wrap-reverse;">
+                <text class="item color-1">1</text>
+                <text class="item color-2">2</text>
+                <text class="item color-3">3</text>
+                <text class="item color-1">4</text>
+                <text class="item color-2">5</text>
+                <text class="item color-3">6</text>
+            </div>
+        </div>
+        <!-- justify-content -->
+        <div class="item-container">
+            <text class="item-title">flex-direction: row;justify-content:flex-end</text>
+            <div style="justify-content:flex-end;  ">
+                <text class="item color-1">1</text>
+                <text class="item color-2">2</text>
+                <text class="item color-3">3</text>
+            </div>
+        </div>
+        <div class="item-container">
+            <text class="item-title">flex-direction: row;justify-content:center</text>
+            <div style="justify-content:center ;  ">
+                <text class="item color-1">1</text>
+                <text class="item color-2">2</text>
+                <text class="item color-3">3</text>
+            </div>
+        </div>
+        <div class="item-container">
+            <text class="item-title">flex-direction: row;justify-content:space-between</text>
+            <div style="justify-content:space-between ;  ">
+                <text class="item color-1">1</text>
+                <text class="item color-2">2</text>
+                <text class="item color-3">3</text>
+            </div>
+        </div>
+        <div class="item-container">
+            <text class="item-title">flex-direction: row;justify-content:space-around</text>
+            <div style="justify-content:space-around ;  ">
+                <text class="item color-1">1</text>
+                <text class="item color-2">2</text>
+                <text class="item color-3">3</text>
+            </div>
+        </div>
+        <!-- align_items -->
+        <div class="item-container">
+            <text class="item-title">flex-direction: column;align-items: stretch</text>
+            <div style="flex-direction: column; ">
+                <text class="color-1">green</text>
+                <text class="color-2">red background color</text>
+                <text class="color-3">blue background color with more content</text>
+            </div>
+        </div>
+        <div class="item-container">
+            <text class="item-title">flex-direction: column;align-items: flex-start</text>
+            <div style="flex-direction: column; align-items: flex-start;">
+                <text class="color-1">green</text>
+                <text class="color-2">red background color</text>
+                <text class="color-3">blue background color with more content</text>
+            </div>
+        </div>
+        <div class="item-container">
+            <text class="item-title">flex-direction: column;align-items: flex-end</text>
+            <div style="flex-direction: column; align-items: flex-end;">
+                <text class="color-1">green</text>
+                <text class="color-2">red background color</text>
+                <text class="color-3">blue background color with more content</text>
+            </div>
+        </div>
+        <div class="item-container">
+            <text class="item-title">flex-direction: column;align-items: center</text>
+            <div style="flex-direction: column; align-items: center;">
+                <text class="color-1">green</text>
+                <text class="color-2">red background color</text>
+                <text class="color-3">blue background color with more content</text>
+            </div>
+        </div>
+        <!-- align-content -->
+        <div class="item-container">
+            <text class="item-title">align-content:stretch</text>
+            <div class="align_content_detail">
+
+                <text class="item color-1">1</text>
+                <text class="item color-2">2</text>
+                <text class="item color-3">3</text>
+            </div>
+        </div>
+        <div class="item-container">
+            <text class="item-title">align-content: flex-start</text>
+            <div class="align_content_detail" style="align-content:flex-start;">
+                <text class="item color-1">1</text>
+                <text class="item color-2">2</text>
+                <text class="item color-3">3</text>
+            </div>
+        </div>
+        <div class="item-container">
+            <text class="item-title">align-content: flex-end</text>
+            <div class="align_content_detail" style="align-content:flex-end;">
+                <text class="item color-1">1</text>
+                <text class="item color-2">2</text>
+                <text class="item color-3">3</text>
+            </div>
+        </div>
+        <div class="item-container">
+            <text class="item-title">align-content: center</text>
+            <div class="align_content_detail" style="align-content:center;">
+                <text class="item color-1">1</text>
+                <text class="item color-2">2</text>
+                <text class="item color-3">3</text>
+            </div>
+        </div>
+        <div class="item-container">
+            <text class="item-title">align-content:space-between</text>
+            <div class="align_content_detail" style="align-content:space-between;">
+                <text class="item color-1">1</text>
+                <text class="item color-2">2</text>
+                <text class="item color-3">3</text>
+            </div>
+        </div>
+        <div class="item-container">
+            <text class="item-title">align-content: space-around</text>
+            <div class="align_content_detail" style="align-content:space-around;">
+
+                <text class="item color-1">1</text>
+                <text class="item color-2">2</text>
+                <text class="item color-3">3</text>
+            </div>
+        </div>
+        <div class="item-container">
+            <text class="item-title">item-container-flex</text>
+            <div class="item-container-flex">
+                <text class="item_flex color-1" style="flex:1;">green</text>
+                <text class="item_flex color-2" style="flex:1;">red background color</text>
+                <text class="item_flex color-3" style="flex:1;">blue background color with more content</text>
+            </div>
+        </div>
+        <div class="item-container">
+            <text class="item-title">item-container-flex-grow</text>
+            <div class="item-container-flex">
+                <text class="item_flex color-1" style="flex-grow:1;">1</text>
+                <text class="item_flex color-2" style="flex-grow:5;">2</text>
+                <text class="item_flex color-3" style="flex-grow:3;">3</text>
+            </div>
+        </div>
+        <div class="item-container">
+            <text class="item-title">item-container-flex-basis</text>
+            <div class="item-container-flex">
+                <text class="item_flex color-1">1</text>
+                <text class="item_flex color-2" style="flex-basis:150px;">2</text>
+                <text class="item_flex color-3">3</text>
+            </div>
+        </div>
+        <div class="item-container">
+            <text class="item-title">item-container-flex-shrink</text>
+            <div class="item-container-flex">
+                <text class="item_flex color-1" style="flex-basis:250px;">1</text>
+                <text class="item_flex color-2" style=" flex-basis:250px;flex-shrink: 3;">2</text>
+                <text class="item_flex color-3" style="flex-basis:250px;">3</text>
+            </div>
+        </div>
+    </div>
+</template>
+
+<style>
+    @import '../Common/css/common.css';
+
+    .item-container {
+        margin: 0px 50px 50px 50px;
+        flex-direction: column;
+    }
+
+    .item-container-flex {
+        height: 150px;
+        width: 550px;
+        margin: 0px 50px 50px 50px;
+    }
+
+    .item-title {
+        line-height: 100px;
+        background-color: #fbf9fe;
+    }
+
+    .item {
+        height: 150px;
+        width: 150px;
+        text-align: center;
+    }
+
+    .item_flex {
+
+        text-align: center;
+    }
+
+    .align_content_detail {
+        border: 1px solid #c3c3c3;
+        height: 650px;
+        width: 150px;
+        flex-wrap: wrap;
+
+    }
+
+    .color-1 {
+        background-color: #09ba07;
+    }
+
+    .color-2 {
+        background-color: #f76160;
+    }
+
+    .color-3 {
+        background-color: #0faeff;
+    }
+</style>
+
+<script>
+    export default {
+        data: {
+            componentName: 'div'
+        },
+        onInit() {
+            this.$page.setTitleBar({ text: 'Div' })
+        }
+    }
+</script>

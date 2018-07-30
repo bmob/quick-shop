@@ -1,0 +1,73 @@
+{
+  "package": "case3",
+  "name": "case3",
+  "versionName": "1.0.0",
+  "versionCode": 1,
+  "icon": "/Common/logo.png",
+  "minPlatformVersion": 1000,
+  "features": [
+    {
+      "name": "system.fetch"
+    },
+    {
+      "name": "system.storage"
+    },
+    {
+      "name": "system.request"
+    },
+    {
+      "name": "system.prompt"
+    },
+    {
+      "name": "system.shortcut"
+    },
+    {
+      "name": "system.router"
+    }
+  ],
+  "permissions": [
+    {
+      "origin": "*"
+    }
+  ],
+  "config": {
+    "logLevel": "log"
+  },
+  "router": {
+    "entry": "Hello",
+    "pages": {
+      "Hello": {
+        "component": "hello",
+        "path": "/"
+      },
+      "shop": {
+        "component": "shop",
+        "path": "/shop"
+      },
+      "shop/test": {
+        "component": "test",
+        "path": "/shop/test"
+      },
+      "main": {
+        "component": "main",
+        "path": "/main"
+      },
+      "us/version": {
+        "component": "version",
+        "path": "/us/version"
+      }
+    }
+  },
+  "display": {
+    "backgroundColor": "#fbf9fe",
+    "titleBar": true,
+    "titleBarBackgroundColor": "#0faeff",
+    "titleBarTextColor": "#ffffff",
+    "menu": true,
+    "pages": {
+      "Hello": {
+        "titleBarText": "TitleBar"
+      }
+    }
+  }
+}

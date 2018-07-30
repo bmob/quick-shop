@@ -1,0 +1,129 @@
+<template>
+  <div class="qui-cells" @click="{{cellClicked}}">
+    <div class="qui-cell" style="height:{{height}}">
+      <div class="qui-cell-left">
+        <image if="leftImg" src="{{leftImg}}" class="qui-cell-img" />
+        <div style="flex-direction: {{direction}}">
+          <text if="title" class="qui-cell-title" style="color:{{titleColor}};font-size:{{fontSize}}">
+            {{title}}
+          </text>
+          <text if="{{desc && direction === 'column'}}" class="qui-cell-desc" style="color:{{descColor}};font-size:{{fontSize}}">{{desc}}
+          </text>
+        </div>
+      </div>
+      <div class="qui-cell-right">
+        <text if="{{desc && direction === 'row'}}" class="qui-cell-desc" style="color:{{descColor}}">{{desc}}
+        </text>
+        <slot></slot>
+        <image if="display" class="qui-cell-arrow" src="data:image/webp;base64,UklGRgYBAABXRUJQVlA4WAoAAAAQAAAADwAAHQAAQUxQSLsAAAABgCPbtmnrZs/ftm3btrtj27Zt27ZtRv+n3p/71O1BRChw20bpGI7vFf692hROrTCiiENzDIbkcFadgV5pnDUWoFMCZ50VaBHD2WAd6kVwNt6GakGczfehjB9n6yMo5OFsfwo5HJxdLiCdjbPHNSQxcfa5+4ghcNDTayqOsOeXRBSBj+/hDLzyGcugMdL599jEa6FxbeZ7UMZP49r116FBBH22ZcKzacxDpyTqT5GevQ0GCN/Cu12DQkEBAFZQOCAkAAAAsAIAnQEqEAAeAD5tLJFFpCKhmAQAQAbEtIAAPZAAAP77nMAA"
+        />
+      </div>
+    </div>
+  </div>
+</template>
+
+<style>
+  .qui-cells {
+    flex: 1;
+    background-color: #FFFFFF;
+    padding: 36px 24px;
+  }
+
+  .qui-cell {
+    height: 100px;
+    width: 1080px;
+  }
+
+  .qui-cell-left {
+    flex: 1;
+    align-items: center;
+  }
+
+  .qui-cell-right {
+    flex: 1;
+    justify-content: flex-end;
+    align-items: center;
+  }
+
+  .qui-cell-img {
+    width: 64px;
+    margin: 0px 25px;
+  }
+
+  .qui-cell-title {
+    /* font-size: 48px; */
+    font-weight: bold;
+  }
+
+  .qui-cell-desc {
+    /* font-size: 48px; */
+    margin-right: 10px;
+    color: #808080;
+  }
+
+  .qui-cell-arrow {
+    width: 24px;
+    height: 36px;
+  }
+</style>
+
+<script>
+  export default {
+    props: {
+      backgroundColor: {
+        type: String,
+        default: '#FFFFFF'
+      },
+      leftImg: String,
+      title: String,
+      titleColor: String,
+      desc: String,
+      descColor: {
+        type: String,
+        default: '#808080'
+      },
+      hasArrow: {
+        type: String,
+        default: "1"
+      },
+      fontSize: {
+        type: String,
+        default: '30px'
+      },
+      height: {
+        type: String,
+        default: '60px'
+      },
+      cellClicked: {
+        type: String,
+        default: 'cellClicked'
+      },
+      direction: {
+        type: String,
+        default: 'row'
+      } //row or column
+    },
+    data: {
+      cellHight: '',
+      display: true
+    },
+    onInit() {
+
+      console.log(this.fontSize,888,this.title)
+      //修改默认值
+      if (this.hasArrow !== "1") {
+        this.display = false
+      }
+      if (this.direction === 'column') {
+        this.cellHight = '120px'
+      }
+
+    },
+    cellClicked: function () {
+      console.log('ox')
+      if (this.title) {
+        this.$emit('quiCellClick')
+      }
+    }
+  }
+</script>
