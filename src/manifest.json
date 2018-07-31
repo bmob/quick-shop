@@ -55,6 +55,10 @@
       "us/version": {
         "component": "version",
         "path": "/us/version"
+      },
+      "auth/login": {
+        "component": "login",
+        "path": "/auth/login"
       }
     }
   },
