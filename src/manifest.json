@@ -23,7 +23,8 @@
     },
     {
       "name": "system.router"
-    }
+    },
+    { "name": "system.device" }
   ],
   "permissions": [
     {
