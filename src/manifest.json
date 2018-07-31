@@ -60,6 +60,10 @@
       "main/detail": {
         "component": "main",
         "path": "/main/detail"
+      },
+      "auth/login": {
+        "component": "login",
+        "path": "/auth/login"
       }
     }
   },

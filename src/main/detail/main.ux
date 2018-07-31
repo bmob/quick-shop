@@ -111,21 +111,18 @@
   @import '../../Common/css/common.css';
 
   .parent {
-    display: flex;
+
     background-color: #dddddd;
     width: 100%;
   }
 
-  .l-child {
-/* flex-shrink:0; */
-    flex-basis: 160px;
-
+  .l-child {    
+    flex-grow:1;
     background-color: #bbbbbb;
   }
 
   .r-child {
-
-    flex-grow:1;
+    flex-basis: 200px;
     background-color: #999999;
   }
 
@@ -142,7 +139,6 @@
     height: 80px;
     padding: 18px;
     border-bottom-width: 1px;
-    border-style: solid;
     border-color: #cccccc;
   }
 

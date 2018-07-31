@@ -1,0 +1,121 @@
+<template>
+    <!-- template里只能有一个根节点 -->
+    <div class="login-container">
+      <div class="input-container">
+        <text class="label">用户名:</text>
+        <input placeholder="请输入您的用户名" class="inp" value="{{username}}"/>
+      </div>
+      <div class="input-container">
+        <text class="label">密码:</text>
+        <input placeholder="请输入您的密码" class="inp" value="{{password}}"/>
+      </div>
+      <text class="btn loginbtn" @click="handlelogin">登录</text>
+      <text class="btn" @click="handleregisiter">注册</text>
+    </div>
+</template>
+
+<style>
+    .login-container {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .title {
+        font-size: 100px;
+    }
+
+    .input-container {
+      justify-content: space-between;
+      border-bottom-width: 1px;
+      border-bottom-color: #dddddd;
+    }
+    .label {
+      flex: 1;
+      width: 100px;
+      margin-right: 20px;
+      text-align: right;
+    }
+    .inp {
+      width: 60%;
+      height: 80px;
+    }
+
+    .btn {
+      text-align: center;
+      background-color: #00bfff;
+      color: #ffffff;
+      width: 80%;
+      height: 80px; 
+      margin-bottom: 10px;
+      border-radius: 5px;
+    }
+
+    .btn:active {
+      background-color: rgb(0, 154, 206);
+
+    }
+
+    .loginbtn {
+      margin-top: 80px;
+    }
+</style>
+
+<script>
+  import prompt from '@system.prompt'
+  import shortcut from '@system.shortcut'
+
+  module.exports = {
+    data: {
+      title: 'World',
+      username: '',
+      password: ''
+    },
+    onInit() {
+      this.$page.setTitleBar({
+        text: 'menu',
+        textColor: '#ffffff',
+        backgroundColor: '#007DFF',
+        backgroundOpacity: 0.5,
+        menu: true
+      })
+    },
+    onMenuPress() {
+      prompt.showContextMenu({
+        itemList: ['添加到桌面'],
+        success: function (data) {
+          shortcut.install({
+            success: function () {
+              // 使用应用加载器时，请先在设置中打开应用加载器的桌面快捷方式
+              prompt.showToast({
+                message: "桌面图标创建成功"
+              })
+            },
+            fail: function (erromsg, errocode) {
+              prompt.showToast({message: "创建失败" + errocode + ': ' + erromsg})
+            },
+            complete: function () {
+              console.log('shortcut complete');
+            }
+          })
+        },
+        fail: function (data, code) {
+          console.log("handling fail, code=" + code);
+        },
+        cancel: function (data) {
+          console.log("handling cancel");
+        },
+        complete: function () {
+          console.log("handling complete");
+        },
+      })
+
+    },
+    handlelogin() {
+      console.log('登录', this.data.username, this.data.password)
+    },
+    handleregisiter() {
+      console.log('注册')
+    }
+  }
+</script>

@@ -86,14 +86,21 @@
 
                 <div class="group-content">
 
-
-                    <div class="my-header">
-                        <image class="avatar" src="/Common/img/xmad.jpg" class="image"></image>
+                    <div class="my-header" @click="handleLogin">
+                        <image class="avatar image" src="/Common/img/xmad.jpg"></image>
                         <text>请登陆1</text>
                     </div>
-
-
+                    
                     <div class="page-doc">
+                        <div class="cell-box nav">
+                            <div class="show-orders">
+                                <qui-cell height='40px' line-height="40px" background-color='#FFFFFF' title='我的订单' desc='查看全部订单' has-arrow="1"></qui-cell>
+                            </div>
+                            <div for="{{mynav}}" class="nav-content">
+                                <image src="{{$item.icon}}" />
+                                <text>{{$item.text}}</text>
+                            </div>
+                        </div>
 
                         <div for="{{myMenu}}" class="cell-box">
                             <qui-cell @qui-cell-click='cellClicked' height='40px' background-color='#FFFFFF' left-img='{{$item.ico}}' title='{{$item.title}}'
@@ -213,7 +220,25 @@
                 interSvcThird: '',
                 template: '',
                 audio: ''
-            }
+            },
+            mynav: [
+                {
+                    icon: '/Common/img/step1.png', 
+                    text: '待付款'
+                },
+                {
+                    icon: '/Common/img/step2.png', 
+                    text: '待发货'
+                },
+                {
+                    icon: '/Common/img/step3.png', 
+                    text: '待收货'
+                },
+                {
+                    icon: '/Common/img/step4.png', 
+                    text: '已完成'
+                },
+            ]
         },
         switchTab: function (i = 1) {
             if (i == 1) {
@@ -315,6 +340,11 @@
             router.push({
                 uri: '/us/version'
             })
+        },
+        handleLogin() {
+            router.push({
+                uri: '/auth/login'
+            }) 
         },
         changeTabIndex(index) {
             console.log(this.tabHeadList[index])
