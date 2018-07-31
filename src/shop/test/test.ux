@@ -1,25 +1,151 @@
 <template>
-    <list>
-        <block for="cities">
-            <list-item type="city">
-                <text>{{$item.name}}</text>
-            </list-item>
-            <block for="$item.spots" if="false">
-                <list-item type="spot">
-                    <text>{{$item.address}}</text>
-                </list-item>
-            </block>
-        </block>
-    </list>
+
+
+    <div>
+        <div>
+            <div class=" item1 color-1">
+                <list class="list">
+                    <list-item type="listItem" class="item-menu" for="{{tabClassList}}">
+                        <text @click="onChangeTabIndex($idx)" class="{{currentIndex === $idx ? 'active' : ''}}" >{{$item.title}}</text>
+                    </list-item>
+                </list>
+            </div>
+
+            <div class="tab-content item2 color-2">
+
+                <div class="theme_box box">
+
+                        <div for="tabListData" class="theme_item">
+                            <image src="{{$item.pic}}" />
+                            <text class="title">{{$item.title}}</text>
+                        </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
 </template>
 
 <script>
-  module.exports= {
-    data: {
-      cities: [
-        {name:"beijing", spots:[{name:"XXX",address:"XXX"},{name:"XXX",address:"XXX"}]},
-        {name:"shanghai", spots:[{name:"XXX",address:"XXX"},{name:"XXX",address:"XXX"}]}
-      ]
+    export default {
+        data: {
+            tabListData: [
+                { pic: 'http://www.honor.cn/public/uploads/20180312/1adb6ecb70161ca0555aa5b7b24150f7.jpg', title: "demo文字" },
+                { pic: 'http://www.honor.cn/public/uploads/20180410/61e388fa5953db7d7e03e02a2b6b28cd.png', title: "demo文字" },
+                { pic: 'http://www.honor.cn/public/uploads/20180421/ec40e6799c5c8e82fb1a39da5719d4d3.jpg', title: "demo文字" },
+                { pic: 'http://www.honor.cn/public/uploads/20180312/1adb6ecb70161ca0555aa5b7b24150f7.jpg', title: "demo文字" },
+                { pic: 'http://www.honor.cn/public/uploads/20180410/61e388fa5953db7d7e03e02a2b6b28cd.png', title: "demo文字" },
+                { pic: 'http://www.honor.cn/public/uploads/20180421/ec40e6799c5c8e82fb1a39da5719d4d3.jpg', title: "demo文字" },
+                { pic: 'http://www.honor.cn/public/uploads/20171226/f1597de41ca2487cc2db5fd46b5de99b.jpg', title: "demo文字" }
+
+            ],
+            tabClassList: [
+                { title: "推荐" ,active:true},
+                { title: "热门", id: 88 },
+                { title: "视频" },
+                { title: "段子" },
+                { title: "汽车" },
+                { title: "社会" },
+                { title: "娱乐" },
+                { title: "军事" },
+                { title: "体育" },
+                { title: "ＮＢＡ" },
+                { title: "财经" }
+            ],
+            currentIndex: 0
+        },
+        onInit() {
+            // 加载第一个页签内容
+            // this.changeTabIndex(0)
+        },
+        changeTabIndex(index) {
+            console.log(this.tabHeadList[index])
+            const item = Object.assign({}, this.tabHeadList[index])
+            item.render = true
+            this.tabHeadList.splice(index, 1, item)
+        },
+        onChangeTabIndex(evt) {
+            console.log(evt)
+            // 改变当前标签
+            this.currentIndex = evt
+
+            // 加载数据
+            // this.changeTabIndex(evt.index)
+        }
     }
-  }
-</script>    
+</script>
+<style>
+    .container {
+        flex-direction: column;
+    }
+    .active{
+        color: #ffffff;
+        background-color: #6495ed;
+    }
+
+    .theme_item,
+    .glob_item {
+        width: 49%;
+        align-items: center;
+        margin: 10px 0;
+        flex-direction: column;
+    }
+    .box {
+        flex-wrap: wrap;
+        padding: 0 10px;
+        justify-content: space-between
+    }
+.box image {
+        height: 300px;
+    }
+    .box .title {
+        font-size: 24px;
+        font-weight: bold;
+        color: #333333;
+        margin-top:10px;
+    }
+
+    .item-span {
+        flex: 1;
+        width: 100%;
+    }
+
+    .item-menu {
+        height: 65px;
+        line-height: 65px;
+        width: 100%;
+
+    }
+
+    .item-menu text {
+        width: 100%;
+        text-align: center;
+    }
+
+    .item1 {
+        width: 20%;
+
+    }
+
+    .item2 {
+        padding: 10px;
+        width: 80%;
+    }
+
+    .item_flex {
+
+        text-align: center;
+    }
+
+    .color-1 {
+        background-color: #eeeeee;
+    }
+
+    .color-2 {
+        /* background-color: #f76160; */
+    }
+
+    .color-3 {
+        background-color: #0faeff;
+    }
+</style>

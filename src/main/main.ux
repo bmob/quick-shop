@@ -49,11 +49,35 @@
                 </div>
 
                 <div class="group-content">
-
+                    <!-- 分类内容 -->
                     <div class="search-box">
                         <qui-searchbar id="search" placeholder='请输入关键字' @qui-search-focus="focus" @qui-search-blur="blur" @qui-search-click="search"
                             @qui-search-clear="clear"></qui-searchbar>
                     </div>
+
+                    <div>
+                        <div class=" item1 class-list">
+                            <list class="list">
+                                <list-item type="listItem" class="item-menu" for="{{tabClassList}}">
+                                    <text @click="onChangeTabIndex($idx)" class="{{currentIndex === $idx ? 'active' : ''}}">{{$item.title}}</text>
+                                </list-item>
+                            </list>
+                        </div>
+
+                        <div class="tab-content item2 color-2">
+
+                            <div class="theme_box box">
+
+                                <div for="tabListData" class="theme_item">
+                                    <image src="{{$item.pic}}" />
+                                    <text class="title">{{$item.title}}</text>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+
 
                 </div>
 
@@ -79,14 +103,16 @@
                         </div>
 
                         <div for="{{myMenu}}" class="cell-box">
-                            <qui-cell @qui-cell-click='cellClicked' height='40px' background-color='#FFFFFF' left-img='{{$item.ico}}' title='{{$item.title}}' desc='{{$item.desc}}' has-arrow="1"></qui-cell>
+                            <qui-cell @qui-cell-click='cellClicked' height='40px' background-color='#FFFFFF' left-img='{{$item.ico}}' title='{{$item.title}}'
+                                desc='{{$item.desc}}' has-arrow="1"></qui-cell>
                         </div>
 
-                         <div class="cell-box">
-                            <qui-cell @qui-cell-click='versionClick' height='80px' background-color='#FFFFFF' left-img='/Common/logo.png' title='版本记录' desc='点击查看' has-arrow="1"></qui-cell>
+                        <div class="cell-box">
+                            <qui-cell @qui-cell-click='versionClick' height='80px' background-color='#FFFFFF' left-img='/Common/logo.png' title='版本记录'
+                                desc='点击查看' has-arrow="1"></qui-cell>
                         </div>
                         <div class="cell-box">
-                            <qui-cell height='80px' background-color='#FFFFFF' left-img='/Common/logo.png' title='联系我们:' desc='QQ:730170034' has-arrow="0"></qui-cell>
+                            <qui-cell height='80px' background-color='#FFFFFF' left-img='/Common/logo.png' title='联系我们' desc='QQ:730170034' has-arrow="0"></qui-cell>
                         </div>
 
                     </div>
@@ -95,9 +121,19 @@
 
 
             <tab-bar class="footer-container">
-                <text class="tab-text" @click="switchTab(1)">首页</text>
-                <text class="tab-text" @click="switchTab(2)">分类</text>
-                <text class="tab-text" @click="switchTab(3)">我</text>
+
+                <div class="footer-container-div" @click="switchTab(1)">
+                    <image class="avatar" src="/Common/img/index1.png" style="height:60%;"></image>
+                    <text class="tab-text">首页</text>
+                </div>
+                <div class="footer-container-div" @click="switchTab(1)">
+                    <image class="avatar" src="/Common/img/type1.png" style="height:60%;"></image>
+                    <text class="tab-text" @click="switchTab(2)">分类</text>
+                </div>
+                <div class="footer-container-div" @click="switchTab(1)">
+                    <image class="avatar" src="/Common/img/center1.png" style="height:60%;"></image>
+                    <text class="tab-text" @click="switchTab(3)">我</text>
+                </div>
             </tab-bar>
         </tabs>
     </div>
@@ -112,10 +148,34 @@
     import prompt from '@system.prompt'
     module.exports = {
         data: {
+            tabListData: [
+                { pic: 'http://www.honor.cn/public/uploads/20180312/1adb6ecb70161ca0555aa5b7b24150f7.jpg', title: "demo文字" },
+                { pic: 'http://www.honor.cn/public/uploads/20180410/61e388fa5953db7d7e03e02a2b6b28cd.png', title: "demo文字" },
+                { pic: 'http://www.honor.cn/public/uploads/20180421/ec40e6799c5c8e82fb1a39da5719d4d3.jpg', title: "demo文字" },
+                { pic: 'http://www.honor.cn/public/uploads/20180312/1adb6ecb70161ca0555aa5b7b24150f7.jpg', title: "demo文字" },
+                { pic: 'http://www.honor.cn/public/uploads/20180410/61e388fa5953db7d7e03e02a2b6b28cd.png', title: "demo文字" },
+                { pic: 'http://www.honor.cn/public/uploads/20180421/ec40e6799c5c8e82fb1a39da5719d4d3.jpg', title: "demo文字" },
+                { pic: 'http://www.honor.cn/public/uploads/20171226/f1597de41ca2487cc2db5fd46b5de99b.jpg', title: "demo文字" }
+
+            ],
+            tabClassList: [
+                { title: "推荐", active: true },
+                { title: "热门", id: 88 },
+                { title: "视频" },
+                { title: "段子" },
+                { title: "汽车" },
+                { title: "社会" },
+                { title: "娱乐" },
+                { title: "军事" },
+                { title: "体育" },
+                { title: "ＮＢＡ" },
+                { title: "财经" }
+            ],
+            currentIndex: 0,
             myMenu: [
-                { "c":"cellClicked","ico": "/Common/logo.png", "title": "反馈建议", "desc": "测试说明" },
-                {"c":"cellClicked", "ico": "/Common/logo.png", "title": "反馈建议", "desc": "测试说明" },
-                {"c":"cellClicked","ico": "/Common/logo.png", "title": "版本记录", "desc": "点击查看" }
+                { "c": "cellClicked", "ico": "/Common/logo.png", "title": "反馈建议", "desc": "测试说明" },
+                { "c": "cellClicked", "ico": "/Common/logo.png", "title": "反馈建议", "desc": "测试说明" },
+                { "c": "cellClicked", "ico": "/Common/logo.png", "title": "版本记录", "desc": "点击查看" }
             ],
 
             indicator: true,
@@ -188,6 +248,9 @@
             } else {
                 this.$page.setTitleBar({ text: '我' })
             }
+        },
+        showContent(num) {
+            this.type = 'content_' + num;
         },
         activeF: function (list, target, addClass) {
             var obj = list;
@@ -270,11 +333,11 @@
                 message: 'value:' + e.detail.value
             })
         },
-        cellClicked(e){
-            console.log("hello",e)
+        cellClicked(e) {
+            console.log("hello", e)
         },
-        versionClick(){
-              router.push({
+        versionClick() {
+            router.push({
                 uri: '/us/version'
             })
         },
@@ -282,6 +345,20 @@
             router.push({
                 uri: '/auth/login'
             }) 
+        },
+        changeTabIndex(index) {
+            console.log(this.tabHeadList[index])
+            const item = Object.assign({}, this.tabHeadList[index])
+            item.render = true
+            this.tabHeadList.splice(index, 1, item)
+        },
+        onChangeTabIndex(evt) {
+            console.log(evt)
+            // 改变当前标签
+            this.currentIndex = evt
+
+            // 加载数据
+            // this.changeTabIndex(evt.index)
         }
     }
 </script>
