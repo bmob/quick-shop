@@ -23,7 +23,8 @@
     },
     {
       "name": "system.router"
-    }
+    },
+    { "name": "system.device" }
   ],
   "permissions": [
     {
@@ -55,6 +56,10 @@
       "us/version": {
         "component": "version",
         "path": "/us/version"
+      },
+      "main/detail": {
+        "component": "main",
+        "path": "/main/detail"
       },
       "auth/login": {
         "component": "login",

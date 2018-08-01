@@ -78,7 +78,7 @@
       "widgetParams": "{}"
     },
     {
-      "name": "Debug Widget auth/login on Device",
+      "name": "Debug Widget main/detail on Device",
       "type": "fastapp",
       "request": "launch",
       "device": "${command:fastapp.choose-device}",
@@ -88,7 +88,7 @@
       "debugServerPort": 8088,
       "remoteDebug": true,
       "elementMode": false,
-      "widgetUri": "auth/login",
+      "widgetUri": "main/detail",
       "isRun": false,
       "autoRun": false,
       "widgetParams": "{}"
@@ -138,8 +138,8 @@
       "path": "/us/version"
     },
     {
-      "name": "auth/login",
-      "id": "auth/login",
+      "name": "main/detail",
+      "id": "main/detail",
       "params": [],
       "path": "/auth/login"
     },
@@ -148,6 +148,12 @@
       "id": "shop/order",
       "params": [],
       "path": "/shop/order"
+    },
+    {
+      "name": "/main/detail",
+      "id": "/main/detail",
+      "params": [],
+      "path": "/main/detail"
     }
   ],
   "lastWidgetUri": "main"

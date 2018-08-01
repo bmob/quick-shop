@@ -126,7 +126,6 @@
   }
 
   .qui-indexlist-group-item .qui-indexlist-location {
-    flex-direction: row;
     align-items: center;
   }
 
