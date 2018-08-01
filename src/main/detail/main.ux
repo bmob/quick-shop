@@ -8,14 +8,7 @@
   <!-- template里只能有一个根节点 -->
   <div class="container">
 
-<div class="parent">
-      <div class="l-child">
-      <text>左边固3</text>
-      </div>
-      <div class="r-child">
-      <text>右边自适应1 右边自适应2 右边自适应3</text>
-      </div>
-    </div>
+
 
     <div class='banner_box'>
       <swiper class="swiper-info" indicator="{{indicator}}" autoplay="{{autoplay}}" interval="{{interval}}">
@@ -51,35 +44,11 @@
     <div class="item-null"></div>
     <!-- 商品详细 -->
     <div class="good-title">
-      <text>描述内容</text>
-      <div>
-        <text>描述内容</text>
-      </div>
-      <div>
-        <text>描述内容</text>
-      </div>
-      <div>
-        <text>描述内容</text>
-      </div>
-      <div>
-        <text>描述内容</text>
-      </div>
-      <div>
-        <text>描述内容</text>
-      </div>
-      <div>
-        <text>描述内容</text>
-      </div>
-      <div>
-        <text>描述内容</text>
-      </div>
-      <div>
-        <text>描述内容</text>
-      </div>
-      <div>
-        <text>描述内容</text>
-      </div>
-      <image src="$bannerArr[0].src"></image>
+      <text>详细描述</text>
+     
+    </div>
+    <div>
+     <image src="bannerArr[0].src"></image>
     </div>
     <!-- 商品详细 -->
     <div @click="showpopup('bottom')" id="buy-button">
@@ -110,20 +79,7 @@
 <style>
   @import '../../Common/css/common.css';
 
-  .parent {
-    background-color: #dddddd;
-    width: 100%;
-  }
 
-  .l-child {    
-    flex-grow:1;
-    background-color: #bbbbbb;
-  }
-
-  .r-child {
-    flex-basis: 200px;
-    background-color: #999999;
-  }
 
   .item-null {
     height: 10px;

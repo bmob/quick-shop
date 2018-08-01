@@ -3,13 +3,23 @@
   flex-direction: column;
 }
 
+/* 左右结构 */
+.parent {
+  width: 100%;
+}
+
+.l-child {    
+  flex-grow:1;
+}
+
+.r-child {
+  flex-basis: 200px;
+}
 
 .active{
   color: #ffffff;
   background-color: #6495ed;
 }
-
-
 
 .item-span {
   flex: 1;
