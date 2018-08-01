@@ -2,7 +2,7 @@
     <!-- template里只能有一个根节点 -->
     <div class="container">
       <div class="order-list-header">
-        <text for="(index,item) in listname" id="{{index}}" @click="pay(index)">{{item}}</text>
+        <text for="(index,item) in listname" tid="id" id="{{index}}" @click="pay(index)">{{item}}</text>
         <!-- <text>全部</text>
         <text id="left" class="border-left">待付款</text> 
         <text class="border-center">待发货</text> 
