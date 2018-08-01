@@ -92,6 +92,22 @@
       "isRun": false,
       "autoRun": false,
       "widgetParams": "{}"
+    },
+    {
+      "name": "Debug Widget shop/order on Device",
+      "type": "fastapp",
+      "request": "launch",
+      "device": "${command:fastapp.choose-device}",
+      "cwd": "${workspaceRoot}",
+      "logLevel": "log",
+      "adbPort": 5037,
+      "debugServerPort": 8088,
+      "remoteDebug": true,
+      "elementMode": false,
+      "widgetUri": "shop/order",
+      "isRun": false,
+      "autoRun": false,
+      "widgetParams": "{}"
     }
   ],
   "currentWidgetUri": "main",
@@ -126,7 +142,13 @@
       "id": "auth/login",
       "params": [],
       "path": "/auth/login"
+    },
+    {
+      "name": "shop/order",
+      "id": "shop/order",
+      "params": [],
+      "path": "/shop/order"
     }
   ],
-  "lastWidgetUri": "shop/test"
+  "lastWidgetUri": "main"
 }

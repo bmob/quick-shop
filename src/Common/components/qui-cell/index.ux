@@ -46,7 +46,7 @@
   }
 
   .qui-cell-img {
-    width: 64px;
+    height: 44px;
     margin: 0px 25px;
   }
 

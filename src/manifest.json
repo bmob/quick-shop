@@ -59,6 +59,10 @@
       "auth/login": {
         "component": "login",
         "path": "/auth/login"
+      },
+      "shop/order": {
+        "component": "order",
+        "path": "/shop/order"
       }
     }
   },

@@ -1,0 +1,141 @@
+<template>
+    <!-- template里只能有一个根节点 -->
+    <div class="container">
+      <div class="order-list-header">
+        <text for="(index,item) in listname" id="{{index}}" @click="pay(index)">{{item}}</text>
+        <!-- <text>全部</text>
+        <text id="left" class="border-left">待付款</text> 
+        <text class="border-center">待发货</text> 
+        <text class="border-right">待收货</text> 
+        <text>已完成</text>  -->
+      </div>
+
+      <div>
+        <text>{{nulltext}}</text>
+      </div>
+    </div>
+</template>
+
+<style>
+    .container {
+        flex-direction: column;
+    }
+    
+    .title {
+        font-size: 100px;
+    }
+    .order-list-header {
+      width: 100%;
+      display: flex;
+      margin-top: 20px;
+      padding-bottom: 20px;
+      border-bottom-width: 1px;
+      border-bottom-color: #dfdfdf;
+    }
+    .order-list-header text {
+      text-align: center;
+      width: 20%;
+    }
+    .border-left {
+      border-left-color: #dfdfdf;
+      border-left-width: 1px;
+    }
+    .border-center {
+      border-left-color: #dfdfdf;
+      border-left-width: 1px;
+      border-right-color: #dfdfdf;
+      border-right-width: 1px;
+    }
+    .border-right {
+      border-right-color: #dfdfdf;
+      border-right-width: 1px;
+    }
+</style>
+
+<script>
+  import router from '@system.router'
+  import prompt from '@system.prompt'
+  import shortcut from '@system.shortcut'
+
+  module.exports = {
+    data: {
+      listname: [
+        '全部',
+        '待付款',
+        '待发货',
+        '待收货',
+        '已完成'
+      ],
+      nulltext: ''
+    },
+    onInit() {
+      this.$page.setTitleBar({
+        text: '订单详情',
+        textColor: '#ffffff',
+        backgroundColor: '#007DFF',
+        backgroundOpacity: 0.5,
+        menu: true
+      })
+      // 路由传参params 
+      console.log(this.num)
+      this.handleTab(this.num)
+    },
+    onMenuPress() {
+      prompt.showContextMenu({
+        itemList: ['添加到桌面'],
+        success: function (data) {
+          shortcut.install({
+            success: function () {
+              // 使用应用加载器时，请先在设置中打开应用加载器的桌面快捷方式
+              prompt.showToast({
+                message: "桌面图标创建成功"
+              })
+            },
+            fail: function (erromsg, errocode) {
+              prompt.showToast({message: "创建失败" + errocode + ': ' + erromsg})
+            },
+            complete: function () {
+              console.log('shortcut complete');
+            }
+          })
+        },
+        fail: function (data, code) {
+          console.log("handling fail, code=" + code);
+        },
+        cancel: function (data) {
+          console.log("handling cancel");
+        },
+        complete: function () {
+          console.log("handling complete");
+        },
+      })
+
+    },
+    handleTab(num) {
+      num = num * 1
+      if (typeof num === 'number') {
+        switch (num) {
+          case 0: 
+            this.nulltext = '全部商品'
+            break
+          case 1: 
+            this.nulltext = '待付款'
+            break          
+          case 2: 
+            this.nulltext = '待发货'
+            break          
+          case 3: 
+            this.nulltext = '待收货'
+            break          
+          case 4: 
+            this.nulltext = '已完成'
+            break
+        }
+      }
+    },
+    pay(id) {
+      console.log(id)
+      console.log(this.$element(id))
+    }
+  }
+</script>
