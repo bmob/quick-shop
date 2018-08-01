@@ -1,4 +1,4 @@
-<import name='qui-searchbar' src='../Common/components/qui-searchbar/index'></import>
+<!-- <import name='qui-searchbar' src='../Common/components/qui-searchbar/index'></import> -->
 
 
 <import name='qui-cell' src='../Common/components/qui-cell/index'></import>
@@ -51,8 +51,8 @@
                 <div class="group-content">
                     <!-- 分类内容 -->
                     <div class="search-box">
-                        <qui-searchbar id="search" placeholder='请输入关键字' @qui-search-focus="focus" @qui-search-blur="blur" @qui-search-click="search"
-                            @qui-search-clear="clear"></qui-searchbar>
+                        <!-- <qui-searchbar id="search" placeholder='请输入关键字' @qui-search-focus="focus" @qui-search-blur="blur" @qui-search-click="search"
+                            @qui-search-clear="clear"></qui-searchbar> -->
                     </div>
 
                     <div>
@@ -90,7 +90,7 @@
                         <image class="avatar image" src="/Common/img/xmad.jpg"></image>
                         <text>请登陆1</text>
                     </div>
-                    
+
                     <div class="page-doc">
                         <div class="cell-box nav">
                             <div class="show-orders">
@@ -223,19 +223,19 @@
             },
             mynav: [
                 {
-                    icon: '/Common/img/step1.png', 
+                    icon: '/Common/img/step1.png',
                     text: '待付款'
                 },
                 {
-                    icon: '/Common/img/step2.png', 
+                    icon: '/Common/img/step2.png',
                     text: '待发货'
                 },
                 {
-                    icon: '/Common/img/step3.png', 
+                    icon: '/Common/img/step3.png',
                     text: '待收货'
                 },
                 {
-                    icon: '/Common/img/step4.png', 
+                    icon: '/Common/img/step4.png',
                     text: '已完成'
                 },
             ]
@@ -344,7 +344,7 @@
         handleLogin() {
             router.push({
                 uri: '/auth/login'
-            }) 
+            })
         },
         changeTabIndex(index) {
             console.log(this.tabHeadList[index])

@@ -7,7 +7,7 @@
         <div class="item-container">
             <text class="item-title">flex-direction: row;flex-wrap:nowrap</text>
             <div style="border-color:#0000ff;">
-                <text class="item color-1">331</text>
+                <text class="item color-1">hello</text>
                 <text class="item color-2">2</text>
                 <text class="item color-3">3</text>
                 <text class="item color-1">4</text>
@@ -64,7 +64,7 @@
         </div>
         <div class="item-container">
             <text class="item-title">flex-direction: row;justify-content:space-around</text>
-            <div style="justify-content:space-around ;  ">
+            <div style="  ">
                 <text class="item color-1">1</text>
                 <text class="item color-2">2</text>
                 <text class="item color-3">3</text>

@@ -24,7 +24,9 @@
     {
       "name": "system.router"
     },
-    { "name": "system.device" }
+    {
+      "name": "system.device"
+    }
   ],
   "permissions": [
     {
@@ -35,8 +37,12 @@
     "logLevel": "log"
   },
   "router": {
-    "entry": "Hello",
+    "entry": "main",
     "pages": {
+      "main/detail": {
+        "component": "main",
+        "path": "/main/detail"
+      },
       "Hello": {
         "component": "hello",
         "path": "/"
@@ -56,10 +62,6 @@
       "us/version": {
         "component": "version",
         "path": "/us/version"
-      },
-      "main/detail": {
-        "component": "main",
-        "path": "/main/detail"
       },
       "auth/login": {
         "component": "login",

@@ -111,7 +111,6 @@
   @import '../../Common/css/common.css';
 
   .parent {
-
     background-color: #dddddd;
     width: 100%;
   }
