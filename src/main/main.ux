@@ -87,16 +87,16 @@
                 <div class="group-content">
 
                     <div class="my-header" @click="handleLogin">
-                        <image class="avatar image" src="/Common/img/xmad.jpg"></image>
+                        <image class="avatar image" src="/Common/img/xmad.jpg" />
                         <text>请登陆1</text>
                     </div>
 
                     <div class="page-doc">
                         <div class="cell-box nav">
                             <div class="show-orders">
-                                <qui-cell height='40px' line-height="40px" background-color='#FFFFFF' title='我的订单' desc='查看全部订单' has-arrow="1"></qui-cell>
+                                <qui-cell height='40px' @qui-cell-click='routerToOrder' background-color='#FFFFFF' title='我的订单' desc='查看全部订单' has-arrow="1"></qui-cell>
                             </div>
-                            <div for="{{mynav}}" class="nav-content">
+                            <div for="{{mynav}}" class="nav-content" onclick="routerToOrder($item.num)">
                                 <image src="{{$item.icon}}" />
                                 <text>{{$item.text}}</text>
                             </div>
@@ -108,11 +108,12 @@
                         </div>
 
                         <div class="cell-box">
-                            <qui-cell @qui-cell-click='versionClick' height='80px' background-color='#FFFFFF' left-img='/Common/logo.png' title='版本记录'
+                            <qui-cell @qui-cell-click='versionClick' height='80px' background-color='#FFFFFF' left-img='/Common/img/version.png' title='版本记录'
                                 desc='点击查看' has-arrow="1"></qui-cell>
                         </div>
                         <div class="cell-box">
-                            <qui-cell height='80px' background-color='#FFFFFF' left-img='/Common/logo.png' title='联系我们' desc='QQ:730170034' has-arrow="0"></qui-cell>
+                            <qui-cell height='80px' background-color='#FFFFFF' left-img='/Common/img/connection.png' title='联系我们' desc='QQ:730170034'
+                                has-arrow="0"></qui-cell>
                         </div>
 
                     </div>
@@ -121,17 +122,16 @@
 
 
             <tab-bar class="footer-container">
-
                 <div class="footer-container-div" @click="switchTab(1)">
-                    <image class="avatar" src="/Common/img/index1.png" style="height:60%;"></image>
+                    <image class="avatar" src="/Common/img/index1.png" style="height:60%;" />
                     <text class="tab-text">首页</text>
                 </div>
                 <div class="footer-container-div" @click="switchTab(1)">
-                    <image class="avatar" src="/Common/img/type1.png" style="height:60%;"></image>
+                    <image class="avatar" src="/Common/img/type1.png" style="height:60%;" />
                     <text class="tab-text" @click="switchTab(2)">分类</text>
                 </div>
                 <div class="footer-container-div" @click="switchTab(1)">
-                    <image class="avatar" src="/Common/img/center1.png" style="height:60%;"></image>
+                    <image class="avatar" src="/Common/img/center1.png" style="height:60%;" />
                     <text class="tab-text" @click="switchTab(3)">我</text>
                 </div>
             </tab-bar>
@@ -173,9 +173,9 @@
             ],
             currentIndex: 0,
             myMenu: [
-                { "c": "cellClicked", "ico": "/Common/logo.png", "title": "反馈建议", "desc": "测试说明" },
-                { "c": "cellClicked", "ico": "/Common/logo.png", "title": "反馈建议", "desc": "测试说明" },
-                { "c": "cellClicked", "ico": "/Common/logo.png", "title": "版本记录", "desc": "点击查看" }
+                { "c": "cellClicked", "ico": "/Common/img/shopcart.png", "title": "购物车", "desc": "测试说明" },
+                { "c": "cellClicked", "ico": "/Common/img/suggestion.png", "title": "反馈建议", "desc": "测试说明" },
+                { "c": "cellClicked", "ico": "/Common/img/version.png", "title": "版本记录", "desc": "点击查看" }
             ],
 
             indicator: true,
@@ -224,18 +224,22 @@
             mynav: [
                 {
                     icon: '/Common/img/step1.png',
+                    num: 1,
                     text: '待付款'
                 },
                 {
                     icon: '/Common/img/step2.png',
+                    num: 2,
                     text: '待发货'
                 },
                 {
                     icon: '/Common/img/step3.png',
+                    num: 3,
                     text: '待收货'
                 },
                 {
                     icon: '/Common/img/step4.png',
+                    num: 4,
                     text: '已完成'
                 },
             ]
@@ -359,6 +363,18 @@
 
             // 加载数据
             // this.changeTabIndex(evt.index)
+        },
+        routerToOrder(num, evt) {
+            // num 有可能是object => event
+            let val = 0
+            let path = '/shop/order'
+            if (typeof num === 'number') {
+                console.log(num, 'num')
+                router.push({ uri: path, params: { 'num': num } })
+            } else {
+                console.log(val, 'val')
+                router.push({ uri: path, params: { 'num': val } })
+            }
         }
     }
 </script>

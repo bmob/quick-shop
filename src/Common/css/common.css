@@ -184,7 +184,7 @@
 
 .my-header{
   background-color: #0faeff;
-  height: 220px;
+  height: 260px;
   flex: 1;
   justify-content: center;
   flex-direction: column;
@@ -211,18 +211,17 @@
 /* nav */
 .nav {
   background-color: #ffffff;
+  flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
 }
 .nav .nav-content {
   width: 25%;
-
   flex-direction: column;
   align-items: center;
   padding: 20px 0;
 }
 .nav .nav-content image {
-  width: 90px;
   height: 75px;
 }

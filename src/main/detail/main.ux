@@ -1,3 +1,5 @@
+<import name='qui-cell' src='../../Common/components/qui-cell/index'></import>
+
 <!-- 计步器组件 -->
 <import name='qui-stepper' src='../../Common/components/qui-stepper/index'></import>
 <import name="qui-popup" src="../../Common/components/qui-popup/index"></import>
@@ -7,9 +9,6 @@
 
   <!-- template里只能有一个根节点 -->
   <div class="container">
-
-
-
     <div class='banner_box'>
       <swiper class="swiper-info" indicator="{{indicator}}" autoplay="{{autoplay}}" interval="{{interval}}">
         <block for="bannerArr">
@@ -33,22 +32,35 @@
     <div class="good-title">
       <div class="good-title-h1">
         <text>运费：</text>
-        <text>35元</text>
+        <text>22元</text>
       </div>
       <div class="good-price">
         <text>剩余</text>
         <text>323</text>
       </div>
     </div>
+    <div class="item-null"></div>
+
+
+    <div class="cell-box">
+
+      <qui-cell background-color='#FFFFFF' @qui-cell-click="showpopup" height="40px" title='{{goodAttr.name}}' desc='{{goodAttr.value}}'
+        has-arrow="1"></qui-cell>
+    </div>
+
+
+
     <!-- end 产品库存 -->
     <div class="item-null"></div>
     <!-- 商品详细 -->
     <div class="good-title">
       <text>详细描述</text>
-     
+
     </div>
-    <div>
-     <image src="bannerArr[0].src"></image>
+    <div style="flex-direction: column;">
+      <image src="http://www.honor.cn/public/uploads/20180421/6509c1ef795fa601d008627741d72a05.jpg"></image>
+      <image src="http://www.honor.cn/public/uploads/20180421/6509c1ef795fa601d008627741d72a05.jpg"></image>
+      <image src="http://www.honor.cn/public/uploads/20180421/6509c1ef795fa601d008627741d72a05.jpg"></image>
     </div>
     <!-- 商品详细 -->
     <div @click="showpopup('bottom')" id="buy-button">
@@ -58,20 +70,48 @@
     <div id="model-price">
       <qui-popup visible="{{popupData.visible}}" position="{{popupData.position}}" @qui-overlay-click="overlayClick">
         <div class="mask">
-          <div class="good-num">
-            <div class="good-num-text">
-              <text>购买数量</text>
+          <div class="model-price-warp">
+            <div class="parent">
+              <div class="l-child">
+                 <text class="model-price-l-title">x百货产品iphonex 手机</text>
+                
+              </div>
+              <div class="r-child">
+                <text class="model-price-l-text">{{priceCount}}元</text>
+              </div>
             </div>
-            <div class="good-num-stepper">
-              <qui-stepper default-value="1" step="1" min="1" max="100" @qui-value-changed="valueChange" @qui-min-over="minOver" @qui-max-over="maxOver"></qui-stepper>
+            <div class="item-null"></div>
+            <div class="model-price-attr">
+               <div>
+                 <text>商品属性:</text>
+                
+           </div>
+              <div class="attr-data">
+                <text for="attrList" class="{{attrSelected === $idx ? 'attrActive' : ''}}" @click="selectAttr($idx)">{{$item.name}}</text>
+             
+              </div>
             </div>
+
+            <div class="good-num">
+              <div class="good-num-text">
+                <text>购买数量</text>
+              </div>
+              <div class="good-num-stepper">
+                <qui-stepper default-value="1" step="1" min="1" max="100" @qui-value-changed="valueChange" @qui-min-over="minOver" @qui-max-over="maxOver"></qui-stepper>
+              </div>
+            </div>
+
+            
           </div>
+          <div  @click="overlayClick()" class="model-price-deno">
+              <text>确认</text>
+            </div>
         </div>
       </qui-popup>
     </div>
     <!-- 弹出层结束-->
 
-    
+
 
   </div>
 </template>
@@ -83,7 +123,7 @@
 
   .item-null {
     height: 10px;
-    background-color: #eeeeee;
+    background-color: #F9F9F9;
   }
 
   .swiper-info {
@@ -91,10 +131,11 @@
   }
 
   .good-title {
+    background-color: #ffffff;
     height: 80px;
     padding: 18px;
     border-bottom-width: 1px;
-    border-color: #cccccc;
+    border-color: #eeeeee;
   }
 
   .good-title-h1 {
@@ -115,26 +156,61 @@
     font-size: 40px;
   }
 
+
   .good-num {
     height: 100px;
-    padding: 18px;
+    padding: 18px 0px;
   }
 
-  .good-num>div {
-    /* background-color: #7fffd4; */
-  }
 
   .good-num-text {
     width: 70%;
   }
 
   .good-num-stepper {
+    padding-top: 8px;
     width: 30%;
-    align-items: center;
+    justify-content: flex-end;
 
   }
+  .model-price-attr{
+    width: 100%;
+    flex-direction: column;
+  }
+  .attr-data{
+    margin-top: 20px;
+    /* background-color: #00ffff; */
 
+  }
+  .attr-data text{
+    padding: 10px 15px;
+    text-align: center;
 
+    color: #ffffff;
+    background-color: #bbbbbb;
+    margin-right: 15px;
+    font-size: 24px;
+  }
+  .attr-data .attrActive{
+    background-color: #ff0000;
+  }
+
+  .model-price-warp {
+    justify-content: flex-end;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 300px;
+    padding: 18px;
+  }
+  .model-price-l-title{
+    font-size: 40px;
+  }
+  .model-price-l-text{
+    font-size: 30px;
+    font-weight: bold;
+    color: #ff0000;
+  }
 
   #buy-button {
     align-items: center;
@@ -152,13 +228,25 @@
     color: #ffffff;
   }
 
-  #model-price {}
+  .model-price-deno {
+
+    width: 100%;
+    align-items: center;
+    flex-direction: column;
+    background-color: #ff0000;
+    height: 80px;
+
+  }
+
+  .model-price-deno text {
+    font-weight: bold;
+    font-size: 50px;
+    line-height: 80px;
+    color: #ffffff;
+  }
 
   .mask {
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    height: 300px;
+     flex-direction: column;
     background-color: #ffffff;
   }
 </style>
@@ -170,6 +258,19 @@
   module.exports = {
 
     data: {
+      price:100,
+      priceCount:100,
+      attrSelected:0,
+      attrList:[
+        {"name":"金色 32G","price":"2999.00"},
+        {"name":"金色 64G","price":"3999.00"},
+        {"name":"金色 128G","price":"4999.00"},
+        {"name":"金色 256G","price":"5999.00"},
+      ],
+      goodAttr: {
+        "name": "商品属性",
+        "value": "选择"
+      },
       popupData: {
         visible: '0',
         position: 'bottom'
@@ -185,12 +286,14 @@
         { pic: 'http://www.honor.cn/public/uploads/20180508/3cb0abb440f41a06a029a073361c8b15.jpg' }
       ],
     },
-    buyModel() {
-      console.log('打开弹出框', this.numModel)
-      this.numModel = true;
+    selectAttr(x) {
+      console.log('xxx',x)
+      this.attrSelected=x;
+      this.price=this.attrList[x].price;
+      this.priceCount=this.attrList[x].price;
     },
     showpopup(pos) {
-
+      console.log("打开弹出框")
       this.popupData.visible = '1'
 
     },
@@ -201,6 +304,8 @@
       // 关闭蒙版
     },
     onInit() {
+      this.selectAttr(0)
+      // this.showpopup('bottom')
       this.$page.setTitleBar({
         text: '详细页面',
         textColor: '#ffffff',
@@ -210,6 +315,12 @@
       })
     },
     valueChange(e) {
+      const num = parseInt(e.detail.value)
+      if(num<1){
+        return
+      }
+      this.priceCount=parseFloat(this.price*num).toFixed(2);
+
       prompt.showToast({
         message: 'value change :' + e.detail.value
       })

@@ -1,6 +1,7 @@
 <script>
   import Bmob from './Bmob.js'
-  Bmob.initialize('bb20359e8e7eb634fff2c76089ce0d80', '0dcb80eb0cf198b9facccbf3f0b29b89');
+  // Bmob.initialize('bb20359e8e7eb634fff2c76089ce0d80', '0dcb80eb0cf198b9facccbf3f0b29b89');
+  Bmob.initialize('5e39190e781829abcc1f3fb90f7a4380', 'd8545b2b0ca17df63052c3475300cee3');
   module.exports = {
     onCreate() {
       console.info('Application onCreate');

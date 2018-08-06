@@ -66,11 +66,15 @@
       "auth/login": {
         "component": "login",
         "path": "/auth/login"
+      },
+      "shop/order": {
+        "component": "order",
+        "path": "/shop/order"
       }
     }
   },
   "display": {
-    "backgroundColor": "#fbf9fe",
+    "backgroundColor": "#ffffff",
     "titleBar": true,
     "titleBarBackgroundColor": "#0faeff",
     "titleBarTextColor": "#ffffff",
