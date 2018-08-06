@@ -291,6 +291,7 @@
       this.attrSelected=x;
       this.price=this.attrList[x].price;
       this.priceCount=this.attrList[x].price;
+      this.goodAttr.value=this.attrList[x].name
     },
     showpopup(pos) {
       console.log("打开弹出框")

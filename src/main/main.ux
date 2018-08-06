@@ -15,7 +15,7 @@
 
                     <div class='banner_box'>
                         <swiper class="swiper" indicator="{{indicator}}" autoplay="{{autoplay}}" interval="{{interval}}">
-                            <block for="bannerArr">
+                            <block  @click="routerToInfo" for="bannerArr">
                                 <image src="{{$item.pic}}" />
                             </block>
                         </swiper>
@@ -26,7 +26,7 @@
                     </div>
                     <div class="theme_box box">
                         <block for="themeArr">
-                            <div class="theme_item">
+                            <div  @click="routerToInfo" class="theme_item">
                                 <image src="{{$item.pic}}" />
                                 <text class="title">{{$item.title}}</text>
                             </div>
@@ -38,7 +38,7 @@
                     </div>
                     <div class="glob_box box">
                         <block for="globArr">
-                            <div class="glob_item">
+                            <div  @click="routerToInfo" class="glob_item">
                                 <image src="{{$item.pic}}" />
                                 <text class="title">{{$item.title}}</text>
                             </div>
@@ -68,7 +68,7 @@
 
                             <div class="theme_box box">
 
-                                <div for="tabListData" class="theme_item">
+                                <div @click="routerToInfo" for="tabListData" class="theme_item">
                                     <image src="{{$item.pic}}" />
                                     <text class="title">{{$item.title}}</text>
                                 </div>
@@ -363,6 +363,10 @@
 
             // 加载数据
             // this.changeTabIndex(evt.index)
+        },
+        routerToInfo(id) {
+            let path = '/main/detail'
+            router.push({ uri: path, params: { 'id': 1 } })
         },
         routerToOrder(num, evt) {
             // num 有可能是object => event

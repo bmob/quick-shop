@@ -110,7 +110,7 @@
       "widgetParams": "{}"
     }
   ],
-  "currentWidgetUri": "/main/detail",
+  "currentWidgetUri": "main/detail",
   "signType": "debugSign",
   "pageConfigurations": [
     {
