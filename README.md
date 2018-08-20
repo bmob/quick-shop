@@ -1,4 +1,4 @@
-# 商城小程序UI源码
+# 快应用商城小程序UI源码
 
 ## 概述
 
@@ -8,7 +8,7 @@
 
 ## 主页预览
 
-![all1](/Users/tanpeng/Applications/web/work/hap/case3/img/all1.gif)
+![all1](img/all1.gif)
 
 ## 首页
 ![home](img/home.png)
@@ -25,6 +25,6 @@
 
 ## 个人中心
 
-![my1](/Users/tanpeng/Applications/web/work/hap/case3/img/my1.png)
+![my1](img/my1.png)
 
-![my2](/Users/tanpeng/Applications/web/work/hap/case3/img/my2.png)
+![my2](img/my2.png)
