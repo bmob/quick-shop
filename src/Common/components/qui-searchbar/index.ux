@@ -76,6 +76,7 @@
 
 <script>
   import { CLEAR_ICON, SEARCH_ICON } from './image'
+// let { CLEAR_ICON, SEARCH_ICON } = ['dd','jj']
 
   export default {
     props: {
